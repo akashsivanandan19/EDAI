@@ -32,5 +32,6 @@ urlpatterns = [
     path('login_new', views.login_test_view),
     path('signup_new', views.signup_test_view),
     path('accounts/', include('allauth.urls')),
+    path('dashboard', views.dashboard_view, name="dashboard"),
     path('', views.landing_view, name="home"),
     path("employer/signup", views.employer_signup, name="employee-login"), ]

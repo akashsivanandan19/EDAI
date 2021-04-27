@@ -41,3 +41,7 @@ def login_test_view(request):
 
 def signup_test_view(request):
     return render(request, "signup_new.html")
+
+
+def dashboard_view(request):
+    return render(request, "dashboard.html")
