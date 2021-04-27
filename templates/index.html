@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+<html lang="en">
+<head>
+    {% block extra_head %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">#}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">#}
+{#    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>#}
+{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>#}
+{#        <title></title>#}
+        <title></title>
+
+    <link rel=”stylesheet” href=”{% static 'css/style.css' %}”>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Document</title>
+
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+  
+    <div class="jumbotron">
+      <h1 class="big-heading"><span class="text1">Empower Illiterate</span><br/>Every one can work</h1>
+      
+        </div>
+        <!-- <img src="icon.jpg" alt="empower icon"/> -->
+  
+
+<div class="table">
+<table >
+   <tr> <th >To Hire</th>
+    <th>To Be Hired</th></tr>
+    <tr><td> Employers need to signup with their basic
+        <br> details or existing 
+        users can<br> simply login with their credentials.</td>
+    <td> New people who are looking for work need to
+         register <br>specifying their skill and basic details,<br>which will generate a ID.</td></tr>
+         <tr><td> <button class="employerButton" onclick="location.href = '/accounts/signup'">Sign up</button></td><td><button class="secondaryAction" onclick="location.href = '/accounts/signup'">Sign up</button></td></tr>
+</table></div>
+
+<div id="contact" class="contact" style = "margin-top: 20px;">
+
+      <h1>Contact Us</h1>
+      ¸<b id="b1">______________</b>
+      <p>Contact Us &nbsp; Drop us a line..!</p>
+      <div class = "card" style = "width: 20rem">
+      <form action="" method="POST">
+           {% csrf_token %}
+           {{ form.as_p }}
+        <fieldset>
+            <div class = "name">
+                <div class="text">Name</div>
+          <input type="text" id="name" autocomplete="off" name = "name">
+                </div>
+          <br>
+            <div class="mail">
+                <div class="text">Email</div>
+          <input type="email" id="email" placeholder="Email Address" autocomplete="off" name = "email">
+            </div>
+          <br>
+            <div class="msg">
+                <div class="text">Message</div>
+          <textarea id="message" placeholder="Enter your Message...." name = "message"></textarea>
+            </div>
+          <br>
+          <button><b>SUBMIT</b></button>
+        </fieldset>
+      </form>
+          </div>
+      </div>
+    <footer>
+      <div class="info">
+        <span class="lnr lnr-map-marker"></span> <i> India</i><br>
+        <span class="lnr lnr-clock"></span> <i>Mon-Sat : 9am to 6pm</i><br>
+        <span class="lnr lnr-phone-handset"></span> <i>+123 456 7890</i><br>
+        <span class="lnr lnr-envelope"></span> <i>empower@illiterate.com</i><br>
+        <span class="lnr lnr-earth"></span> <i><a href="#">Inside Illusions</a></i><br>
+      </div>
+    </footer>
+
+
+
+{% endblock %}
+</body>
+</html>
