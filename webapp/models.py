@@ -17,7 +17,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     phno = PhoneNumberField(blank=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name','phno']
+    REQUIRED_FIELDS = ['name', 'phno']
 
     objects = CustomUserManager()
 
@@ -42,3 +42,13 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Task(models.Model):
+    employer = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    description = models.CharField(max_length=300, blank=False, null=True)
+    name = models.CharField(max_length=100, blank=False, null=True)
+    employee = models.EmailField(_("email address"), unique=True)
+
+    def __str__(self):
+        return self.name
