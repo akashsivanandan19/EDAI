@@ -45,10 +45,25 @@ class Contact(models.Model):
 
 
 class Task(models.Model):
+    ASSIGNED = 'A'
+    WAITING = 'W'
+    IN_PROGRESS = 'P'
+    COMPLETED = 'C'
+    JOB_STATUS = (
+        (ASSIGNED, 'Assigned'),
+        (WAITING, 'Waiting'),
+        (IN_PROGRESS, 'In Progress'),
+        (COMPLETED, 'Completed'),
+    )
     employer = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     description = models.CharField(max_length=300, blank=False, null=True)
     name = models.CharField(max_length=100, blank=False, null=True)
     employee = models.EmailField(_("email address"), unique=True)
+    status = models.CharField(
+        max_length=1,
+        choices=JOB_STATUS,
+        default=ASSIGNED,
+    )
 
     def __str__(self):
         return self.name
