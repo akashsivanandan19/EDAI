@@ -34,6 +34,16 @@ class Employee(models.Model):
     email = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     experience = models.IntegerField(null=False, blank=False)
 
+    def __str__(self):
+        return self.email
+
+
+class Review(models.Model):
+    rating = models.FloatField(null=True, blank=True, default=None)
+
+    def __str__(self):
+        return self.rating
+
 
 class Contact(models.Model):
     email = models.EmailField(_('email address'))
@@ -59,6 +69,7 @@ class Task(models.Model):
     description = models.CharField(max_length=300, blank=False, null=True)
     name = models.CharField(max_length=100, blank=False, null=True)
     employee = models.EmailField(_("email address"), unique=True)
+    category = models.CharField(max_length=1)
     status = models.CharField(
         max_length=1,
         choices=JOB_STATUS,
