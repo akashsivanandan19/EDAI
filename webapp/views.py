@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from webapp.forms import ContactForm, EmployerSignupForm
-from webapp.models import Contact
+from webapp.models import Contact, Task
 
 
 def landing_view(request):
@@ -35,13 +35,18 @@ class EmployerSignupView(SignupView):
 employer_signup = EmployerSignupView.as_view()
 
 
-def login_test_view(request):
-    return render(request, "login_new.html")
+# def login_test_view(request):
+#     return render(request, "login_new.html")
+#
+#
+# def signup_test_view(request):
+#     return render(request, "signup_new.html")
 
 
-def signup_test_view(request):
-    return render(request, "signup_new.html")
-
-
-def dashboard_view(request):
+def customer_dashboard_view(request):
     return render(request, "dashboard.html")
+
+
+def employee_dashboard_view(request):
+    jobs = Task.objects
+    return render(request, "dashboard.html", {'jobs', jobs})
