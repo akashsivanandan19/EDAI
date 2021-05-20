@@ -170,4 +170,5 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 ACCOUNT_ADAPTER = 'allauth_2fa.adapter.OTPAdapter'
 
-ACCOUNT_FORMS = {'signup': 'webapp.forms.CustomUserCreationForm'}
+# ACCOUNT_FORMS = {'signup': 'webapp.forms.CustomUserCreationForm'}
+ACCOUNT_FORMS = {'signup': 'webapp.forms.CustomSignupForm'}

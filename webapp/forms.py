@@ -18,56 +18,47 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('email',)
 
 
-class EmployeeSignupForm(SignupForm):
+class CustomSignupForm(SignupForm):
 
+    def __init__(self, *args, **kwargs):
+        # Call the init of the parent class
+        super(CustomSignupForm, self).__init__(*args, **kwargs)
+        self.fields['name'] = forms.CharField(required=True)
+        self.fields['phno'] = forms.IntegerField(required=True)
 
-    # def save(self, request):
-    #     user = super(EmployerSignupForm, self).save(request)
-    #     employer = Employer(
-    #         email=user,
-    #         experience=self.cleaned_data.get('experience')
-    #
-    #     )
-    #     employer.save()
-    #     return employer.email
-    experience = forms.IntegerField(required=True, label=_("Experience"))
-    name = forms.CharField(max_length=55, label=_("Name"))
-    email = forms.CharField(max_length=55, label=_("Email"))
-    phno = forms.CharField(max_length=12, label=_("Mobile"))
+        self.fields['email'].widget.attrs['class'] = 'form-control'
+        self.fields['name'].widget.attrs['class'] = 'form-control'
+        self.fields['phno'].widget.attrs['class'] = 'form-control'
+        self.fields['password1'].widget.attrs['class'] = 'form-control'
+        self.fields['password2'].widget.attrs['class'] = 'form-control'
 
-    class Meta:
-        fields = ("name", "email", "phno", "email", "password"), "experience"
+    # # Put in custom signup logic
+    # def custom_signup(self, request, user):
+    #     # Set the user's type from the form reponse
+    #     user.email = self.cleaned_data["email"]
+    #     user.name = self.cleaned_data["name"]
+    #     user.phno = self.cleaned_data["phno"]
+    #     user.password = self.cleaned_data["password1"]
+    #     # user.save()
+    #     user = super(CustomSignupForm, self).save(request)
+    #     return user
 
     def save(self, request):
+
         # Ensure you call the parent class's save.
         # .save() returns a User object.
-        user = super(EmployeeSignupForm, self).save(request)
+        phno = self.cleaned_data.pop('phno')
+        user = super(CustomSignupForm, self).save(request)
 
-        user.name = self.cleaned_data.get('name')
-        user.email = self.cleaned_data.get('email')
-        user.phno = self.cleaned_data.get('phno')
-        user.experience = self.cleaned_data.get("experience")
-        user.save()
+        # Add your own processing here.
 
         # You must return the original result.
         return user
 
 
-# class MyCustomLoginForm(LoginForm):
-#
-#     def login(self, *args, **kwargs):
-#         # Add your own processing here.
-#         super(MyCustomLoginForm, self).__init__(*args, **kwargs)
-#         self.fields['login'].widget.attrs['class'] = 'form-control'
-#         self.fields['password'].widget.attrs['class'] = 'form-control'
-#         self.fields['remember'].widget.attrs['class'] = 'form-control'
-#
-#         # You must return the original result.
-#         return super(MyCustomLoginForm, self).login(*args, **kwargs)
-
 class CustomLoginForm(LoginForm):
-    def __init__(self,*args,**kwargs):
-        super(CustomLoginForm,self).__init__(*args,**kwargs)
+    def __init__(self, *args, **kwargs):
+        super(CustomLoginForm, self).__init__(*args, **kwargs)
         self.fields['login'].widget.attrs['class'] = 'form-control'
         self.fields['password'].widget.attrs['class'] = 'form-control'
         self.fields['remember'].widget.attrs['class'] = 'form-check-input'

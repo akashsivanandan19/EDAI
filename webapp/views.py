@@ -4,7 +4,7 @@ from django.shortcuts import render
 from allauth.account.views import LoginView
 
 # Create your views here.
-from webapp.forms import ContactForm, EmployeeSignupForm
+from webapp.forms import ContactForm, CustomSignupForm
 from webapp.models import Contact, Task
 
 
@@ -25,25 +25,13 @@ def landing_view(request):
     return render(request, "index.html")
 
 
-# def employer_signup(SignupView):
-#     return render(request, "employer_signup.html")
-
-class EmployeeSignupView(SignupView):
-    template_name = "account/employer_signup.html"
-    form_class = EmployeeSignupForm
-    view_name = "employer_signup"
-
-
-employee_signup = EmployeeSignupView.as_view()
-
-
-# def login_test_view(request):
-#     return render(request, "login_new.html")
+# class EmployeeSignupView(SignupView):
+#     template_name = "account/employer_signup.html"
+#     form_class = CustomSignupForm
+#     view_name = "employer_signup"
 #
 #
-# def signup_test_view(request):
-#     return render(request, "signup_new.html")
-
+# employee_signup = EmployeeSignupView.as_view()
 
 def customer_dashboard_view(request):
     return render(request, "dashboard.html")
@@ -63,4 +51,3 @@ def test_view(request):
         'tasks': tasks
     }
     return render(request, "contact.html", context)
-

@@ -51,37 +51,37 @@
 
       <!-- Name input -->
       <div class="form-outline mb-4">
-        <input type="text" id="registerName" class="form-control" />
-        <label class="form-label" for="registerName">Name</label>
+{#        <input type="text" id="{{ form.name.name }}" name = "{{ form.name.name }}" class="form-control" />#}
+          {{ form.name }}
+        <label class="form-label" for="{{ form.name.name }}">Name</label>
       </div>
 
-      <!-- Experience input -->
-      <div class="form-outline mb-4">
-          <input type  = "text" class="form-control" id = {{ form.experience.name }} />
-          <label class="form-label" for={{ form.experience.name }}>Experience</label>
-      </div>
       <!-- Phone Number input -->
       <div class="form-outline mb-4">
-          <input type  = "text" class="form-control" id = {{ form.phno.name }} />
-          <label class="form-label" for={{ form.phno.name }}>Phone Number</label>
+{#          <input type  = "text" class="form-control" id = "{{ form.phno.name }}" />#}
+          {{ form.phno }}
+          <label class="form-label" for="{{ form.phno.name }}">Phone Number</label>
       </div>
 
       <!-- Email input -->
       <div class="form-outline mb-4">
-        <input type="email"  class="form-control" name={{ form.email.name }} id="{{ form.email.name }}" />
-        <label class="form-label" for={{ form.email.name }}>Email</label>
+{#        <input type="email"  class="form-control" name="{{ form.email.name }}" id="{{ form.email.name }}" />#}
+          {{ form.email }}
+        <label class="form-label" for="{{ form.email.name }}">Email</label>
       </div>
 
 
       <!-- Password input -->
       <div class="form-outline mb-4">
-        <input type="password" id="{{form.password.name  }}" class="form-control" />
+{#        <input type="password" id="{{form.password.name  }}" class="form-control" />#}
+          {{ form.password1 }}
         <label class="form-label" for="registerPassword">Password</label>
       </div>
 
       <!-- Repeat Password input -->
       <div class="form-outline mb-4">
-        <input type="password" id="registerRepeatPassword" class="form-control" />
+{#        <input type="password" id="registerRepeatPassword" class="form-control" />#}
+            {{ form.password2 }}
         <label class="form-label" for="registerRepeatPassword">Repeat password</label>
       </div>
 
