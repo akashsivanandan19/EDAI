@@ -1,47 +1,113 @@
-{% extends "account/base.html" %}
+ {% load static %}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.css"
+  rel="stylesheet"
+/>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 mx-auto my-4">
 
 
-{% load i18n %}
-{% load account socialaccount %}
+    <form method = "post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.source.errors }}
+        {{ form.source }}
+      <div class="text-center mb-3">
+        <p>Sign in with:</p>
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+          <i class="fab fa-facebook-f"></i>
+        </button>
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+          <i class="fab fa-google"></i>
+        </button>
 
-{% block content %}
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+          <i class="fab fa-twitter"></i>
+        </button>
 
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+          <i class="fab fa-github"></i>
+        </button>
+      </div>
 
-{% get_providers as socialaccount_providers %}
+      <p class="text-center">or:</p>
 
-{% if socialaccount_providers %}
+      <!-- Email input -->
+      <div class="form-outline mb-4 w-50">
+      <input type="email" name="{{ form.login.name }}" id="{{ form.login.name }}"  class="form-control" />
+{#          {{ form.login }}#}
+        <label class="form-label" for={{ form.login.name }}>Email</label>
+      </div>
 
-<p> </p>
+      <!-- Password input -->
+      <div class="form-outline mb-4 w-50">
+       <input type="password" name="{{ form.password.name }}" id="{{ form.password.name }}" class="form-control" />
+        <label class="form-label" for="{{ form.password.name }}">Password</label>
+      </div>
 
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
-    <div class="card mx-auto" style="width: 25rem; height: 15rem; margin-top: 5rem;">
-    <div class="wrapper fadeInDown">
-     <div id="formContent">
-	<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-
-		<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-   {% load socialaccount %}
-    <div class = "content">
-        <a href="{% provider_login_url "google" openid="https://www.google.com/accounts/o8/id" next="//" %}">Login with Google  </a>
-		<a class="button secondaryAction" href="{% url 'account_reset_password' %}" style = "margin-left: 1rem">{% trans "Forgot Password?" %}</a>
+      <!-- 2 column grid layout -->
+      <div class="row mb-4">
+        <div class="col-md-6 d-flex justify-content-center">
+          <!-- Checkbox -->
+          <div class="form-check mb-3 mb-md-0">
+            <input
+              class="form-check-input"
+              name="{{ form.remember.name }}"
+              type="checkbox"
+              value=""
+              id={{ form.remember.name }}
+              checked
+            />
+            <label class="form-check-label" for={{ form.remember.name }}> Remember me </label>
+          </div>
         </div>
-		<button class="primaryAction" type="submit" style = "margin-right: 5rem; margin-left: 1rem; margin-top: 1rem;">{% trans "Sign In" %}</button>
-        <button class="secondaryAction" onclick="location.href = '/accounts/signup'" style = "margin-top: 1rem;">Sign up</button>
-	</form>
-    </div>
-</div>
-    </div>
 
-{% endblock %}
+        <div class="col-md-6 d-flex justify-content-center">
+          <!-- Simple link -->
+          <a href="#!">Forgot password?</a>
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+      <!-- Register buttons -->
+      <div class="text-center">
+        <p>Not a member? <a href="/accounts/signup">Register</a></p>
+      </div>
+    </form>
+  </div>
+
+
+<!-- Pills content -->
+</div>
+</div>
+
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"
+></script>
+</body>
+</html>
