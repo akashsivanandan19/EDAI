@@ -28,6 +28,7 @@
 
     <form method="post">
         {% csrf_token %}
+        {{ form.errors }}
       <div class="text-center mb-3">
         <p>Sign up with:</p>
         <button type="button" class="btn btn-primary btn-floating mx-1">
@@ -58,7 +59,7 @@
 
       <!-- Phone Number input -->
       <div class="form-outline mb-4">
-{#          <input type  = "text" class="form-control" id = "{{ form.phno.name }}" />#}
+{#          <input type  = "tel" class="form-control" id = "{{ form.phno.name }}" />#}
           {{ form.phno }}
           <label class="form-label" for="{{ form.phno.name }}">Phone Number</label>
       </div>
@@ -73,16 +74,16 @@
 
       <!-- Password input -->
       <div class="form-outline mb-4">
-{#        <input type="password" id="{{form.password.name  }}" class="form-control" />#}
+{#        <input type="password" id="{{ form.password1.name  }}" class="form-control" />#}
           {{ form.password1 }}
         <label class="form-label" for="registerPassword">Password</label>
       </div>
 
       <!-- Repeat Password input -->
       <div class="form-outline mb-4">
-{#        <input type="password" id="registerRepeatPassword" class="form-control" />#}
+{#        <input type="password" id="{{ form.password2.name }}" name = {{ form.password2.name }} class="form-control" />#}
             {{ form.password2 }}
-        <label class="form-label" for="registerRepeatPassword">Repeat password</label>
+        <label class="form-label" for="{{ form.password2.name }}">Repeat password</label>
       </div>
 
       <!-- Submit button -->

@@ -2,6 +2,7 @@ from allauth.account.forms import SignupForm, LoginForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.utils.translation import ugettext_lazy as _
+from phonenumber_field.formfields import PhoneNumberField
 
 from .models import CustomUser, Employer
 
@@ -24,7 +25,7 @@ class CustomSignupForm(SignupForm):
         # Call the init of the parent class
         super(CustomSignupForm, self).__init__(*args, **kwargs)
         self.fields['name'] = forms.CharField(required=True)
-        self.fields['phno'] = forms.IntegerField(required=True)
+        self.fields['phno'] = PhoneNumberField(required=True)
 
         self.fields['email'].widget.attrs['class'] = 'form-control'
         self.fields['name'].widget.attrs['class'] = 'form-control'
@@ -44,12 +45,15 @@ class CustomSignupForm(SignupForm):
     #     return user
 
     def save(self, request):
-
         # Ensure you call the parent class's save.
         # .save() returns a User object.
-        phno = self.cleaned_data.pop('phno')
-        user = super(CustomSignupForm, self).save(request)
 
+        user = super(CustomSignupForm, self).save(request)
+        phno = self.cleaned_data['phno']
+        name = self.cleaned_data['name']
+        user.phno = phno
+        user.name = name
+        user.save()
         # Add your own processing here.
 
         # You must return the original result.
