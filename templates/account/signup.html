@@ -21,11 +21,13 @@
     <title>Signup</title>
 </head>
 <body>
+{% include 'navbar.html' %}
 
 <div class="container">
   <div class="row">
     <div class="col-md-5 mx-auto my-4">
-
+        {% load account socialaccount %}
+        {% get_providers as socialaccount_providers %}
     <form method="post">
         {% csrf_token %}
         {{ form.errors }}
@@ -34,10 +36,11 @@
         <button type="button" class="btn btn-primary btn-floating mx-1">
           <i class="fab fa-facebook-f"></i>
         </button>
-
+         <a href="{% provider_login_url 'google' %}">
         <button type="button" class="btn btn-primary btn-floating mx-1">
           <i class="fab fa-google"></i>
         </button>
+         </a>
 
         <button type="button" class="btn btn-primary btn-floating mx-1">
           <i class="fab fa-twitter"></i>
@@ -88,6 +91,9 @@
 
       <!-- Submit button -->
       <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+        <div class="text-center">
+        <p>Have an account? <a href="/accounts/login">Sign in</a></p>
+      </div>
     </form>
   </div>
       </div>

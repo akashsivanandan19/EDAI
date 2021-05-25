@@ -29,6 +29,9 @@ class Employer(models.Model):
     email = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     address = models.CharField(max_length=300, blank=False, null=False)
 
+    def __str__(self):
+        return str(self.email)
+
 
 class Employee(models.Model):
     email = models.OneToOneField(CustomUser, on_delete=models.CASCADE)

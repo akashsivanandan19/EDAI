@@ -4,8 +4,8 @@ from django.shortcuts import render
 from allauth.account.views import LoginView
 
 # Create your views here.
-from webapp.forms import ContactForm, CustomSignupForm
-from webapp.models import Contact, Task
+from webapp.forms import ContactForm, CustomSignupForm, EditProfileForm
+from webapp.models import Contact, Task, CustomUser, Employer
 
 
 def landing_view(request):
@@ -54,4 +54,24 @@ def city_view(request, city):
 
 
 def profile_view(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST)
+        if form.is_valid() and request.user.is_authenticated:
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            phno = form.cleaned_data['phno']
+            address = form.cleaned_data['address']
+            user = CustomUser.objects.get(email=request.user)
+            employer = Employer(email=user, address=address)
+            user.name = name
+            user.email = email
+            user.phno = phno
+            user.save()
+            employer.save()
+            print(form.__dict__)
+
+        else:
+            print(form.errors)
+            # print(form.__dict__)
+
     return render(request, "profile.html")

@@ -71,6 +71,13 @@ class CustomLoginForm(LoginForm):
         return super(CustomLoginForm, self).login(*args, **kwargs)
 
 
+class EditProfileForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    email = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    address = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    phno = PhoneNumberField(widget=forms.TextInput(attrs={"class": "form-control"}))
+
+
 class ContactForm(forms.Form):
     name = forms.CharField(required=False)
     email = forms.CharField(required=True)

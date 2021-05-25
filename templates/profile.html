@@ -24,12 +24,107 @@
 </head>
 <body>
 {% block content %}
+    {% include 'navbar.html' %}
 <div class="container-md text-center" style="margin-top: 2rem; font-size: xx-large">Your Details</div>
+
+<div class="row">
+    <div class="col-md-5 mx-auto my-4">
+        <div class="card">
+  <div class="bg-image hover-overlay ripple mx-auto" id ="pfp" data-mdb-ripple-color="light">
+    <i class="fas fa-user-circle fa-8x"></i>
+    <a href="/home">
+      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+    </a>
+      <div class="row">
+          <p>  Edit profile picture</p>
+      </div>
+  </div>
+            <div class="card-body">
+
+{#<div class="row">#}
+{#  <div class="col">#}
+{#    <!-- Name input -->#}
+{#    <div class="form-outline">#}
+{#      <input type="text" id="form8Example1" class="form-control min-vw-100" value="{{ user.name }}" />#}
+{#      <label class="form-label" for="form8Example1">Name</label>#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{#<div class="row" style="margin-top: 1.5rem">#}
+{#  <div class="col">#}
+{#    <!-- Name input -->#}
+{#    <div class="form-outline">#}
+{#      <input type="tel" id="form8Example2" class="form-control min-vw-100" value="{{ user.phno }}" />#}
+{#      <label class="form-label" for="form8Example2">Phone number</label>#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{# <div class="row" style="margin-top: 1.5rem">#}
+{#  <div class="col">#}
+{#    <!-- Email input -->#}
+{#    <div class="form-outline">#}
+{#      <input type="email" id="form8Example3" class="form-control min-vw-100" value="{{ user.email }}" />#}
+{#      <label class="form-label" for="form8Example3">Email</label>#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{#</div>#}
+{#</div>#}
+{#</div>#}
+      <form method="post">
+        {% csrf_token %}
+        {{ form.errors }}
+
+
+
+      <!-- Name input -->
+      <div class="form-outline mb-4">
+        <input type="text" id="name" name = "name" value="{{ user.name }}" class="form-control" />
+{#          {{ form.name }}#}
+        <label class="form-label" for="name">Name</label>
+      </div>
+
+      <!-- Phone Number input -->
+      <div class="form-outline mb-4">
+          <input type  = "tel" class="form-control" id = "phno" name="phno" value="{{ user.phno }}" />
+{#          {{ form.phno }}#}
+          <label class="form-label" for="phno">Phone Number</label>
+      </div>
+
+      <!-- Email input -->
+      <div class="form-outline mb-4">
+        <input type="email"  class="form-control" name="email" id="email" value="{{ user.email }}" />
+{#          {{ form.email }}#}
+        <label class="form-label" for="email">Email</label>
+      </div>
+
+           <!-- Address input -->
+      <div class="form-outline mb-4">
+        <input type="text" style="height: 100px" class="form-control" name="address" id="address" />
+{#          {{ form.email }}#}
+        <label class="form-label" for="address">Address</label>
+      </div>
+
+
+
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block mb-3">Save changes</button>
+        <div class="text-center">
+      </div>
+    </form>
+
+    </div>
+</div>
+
+
+
+
 <!-- MDB -->
 <script
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"
 ></script>
+
 
 {% endblock %}
 </body>
