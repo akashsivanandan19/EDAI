@@ -36,6 +36,6 @@ admin.site.register(Employer)
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'category', 'status')
-    ordering = ('category', 'status',)
-    search_fields = ('category', 'status')
+    list_display = ('name', 'description', 'category', 'status', 'city')
+    ordering = ('category', 'status')
+    search_fields = ('category', 'status', 'city')

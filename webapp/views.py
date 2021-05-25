@@ -25,14 +25,6 @@ def landing_view(request):
     return render(request, "index.html")
 
 
-# class EmployeeSignupView(SignupView):
-#     template_name = "account/employer_signup.html"
-#     form_class = CustomSignupForm
-#     view_name = "employer_signup"
-#
-#
-# employee_signup = EmployeeSignupView.as_view()
-
 def customer_dashboard_view(request):
     return render(request, "dashboard.html")
 
@@ -51,3 +43,15 @@ def test_view(request):
         'tasks': tasks
     }
     return render(request, "contact.html", context)
+
+
+def city_view(request, city):
+    tasks = Task.objects.filter(city=city)
+    context = {
+        'tasks': tasks
+    }
+    return render(request, "cities.html", context)
+
+
+def profile_view(request):
+    return render(request, "profile.html")

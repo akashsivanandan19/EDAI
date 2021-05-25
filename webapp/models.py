@@ -59,14 +59,27 @@ class Task(models.Model):
     WAITING = 'W'
     IN_PROGRESS = 'P'
     COMPLETED = 'C'
+    PUNE = 'Pune'
+    MUMBAI = 'Mumbai'
+    BANGALORE = 'Bangalore'
+    DELHI = 'Delhi'
     JOB_STATUS = (
         (ASSIGNED, 'Assigned'),
         (WAITING, 'Waiting'),
         (IN_PROGRESS, 'In Progress'),
         (COMPLETED, 'Completed'),
     )
+    CITY = (
+        (MUMBAI, 'Mumbai'),
+        (PUNE, 'Pune'),
+        (BANGALORE, 'Bangalore'),
+        (DELHI, 'Delhi'),
+    )
     employer = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     description = models.CharField(max_length=300, blank=False, null=True)
+    city = models.CharField(max_length=10, blank=False, null=True,
+                            choices=CITY,
+                            default=ASSIGNED, )
     name = models.CharField(max_length=100, blank=False, null=True)
     employee = models.EmailField(_("email address"), unique=True)
     category = models.CharField(max_length=20, blank=False, null=True)

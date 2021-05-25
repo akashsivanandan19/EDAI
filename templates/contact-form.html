@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+<!-- Default form contact -->
+
+  <p class="h4 mb-4 text-center">Have any questions?</p>
+ <p class="h5 mb-4 text-center">Contact Us</p>
+<form method="post">
+    {% csrf_token %}
+  <!-- Name input -->
+  <div class="form-outline mb-4">
+    <input type="text" id="form4Example1" name="name" class="form-control" />
+    <label class="form-label" for="form4Example1">Name</label>
+  </div>
+
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="email" id="form4Example2" name="email" class="form-control" />
+    <label class="form-label" for="form4Example2">Email address</label>
+  </div>
+
+  <!-- Message input -->
+  <div class="form-outline mb-4">
+    <textarea class="form-control" id="form4Example3" name="message" rows="4"></textarea>
+    <label class="form-label" for="form4Example3">Message</label>
+  </div>
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-toggle="modal"
+  data-mdb-target="#confirmationModal">Send</button>
+
+    <div
+  class="modal fade"
+  id="confirmationModal"
+  tabindex="-1"
+  aria-labelledby="confirmationModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Your contact request has been recieved</div>
+{#      <div class="modal-footer">#}
+{#        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">#}
+{#          Close#}
+{#        </button>#}
+{#        <button type="button" class="btn btn-primary">Save changes</button>#}
+{#      </div>#}
+    </div>
+  </div>
+</div>
+
+</form>
+<!-- Default form contact -->
+
+</body>
+</html>

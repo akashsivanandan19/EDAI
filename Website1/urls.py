@@ -30,8 +30,10 @@ urlpatterns = [
     url(r'^', include('allauth_2fa.urls')),
     url(r'^', include('allauth.urls')),
     path('test/', views.test_view, name='test'),
+    path('services/<str:city>/', views.city_view, name='city'),
     path('accounts/', include('allauth.urls')),
     path('customer/dashboard', views.customer_dashboard_view, name="dashboard"),
     path('employee/dashboard', views.employee_dashboard_view, name="dashboard"),
-    path('', views.landing_view, name="home"), ]
+    path('', views.landing_view, name="home"),
+    path('profile/', views.profile_view, name="profile"), ]
 # path("employee/signup", views.employee_signup, name="employee-login"),
