@@ -27,8 +27,11 @@
 </head>
 <body>
 {% block content %}
+    <header>
     {% include 'navbar.html' %}
     <div class="container-md text-center" style="margin-top: 2rem; font-size: xx-large; margin-bottom: 2rem">Services available in your neighbourhood</div>
+    </header>
+    <main></main>
 {#<table class="table table-striped table-bordered">#}
 {#  <thead>#}
 {#    <tr>#}
@@ -49,10 +52,91 @@
 {#  {% endfor %}#}
 {#  </tbody>#}
 {#</table>#}
+<div class="grid">
+ <div class="grid-item">
+    <div class="card mb-3 hover-overlay ripple shadow-1-strong" data-mdb-ripple-color="light" style="max-width: 700px; margin-left: 1rem;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{% static 'images/air-conditioner.jpg' %}" alt="..." style="max-width: 100%; max-height: 100%">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">AC service and repair</h5>
+          <p class="card-text">Get certified professionals for servicing, repair and installation of your air conditioners</p>
+           <a href="#" class="btn btn-primary">Book appointment</a>
+      </div>
+    </div>
+  </div>
+    </div>
+  <div class="grid-item">
+      <div class="card mb-3 hover-overlay ripple shadow-1-strong" data-mdb-ripple-color="light" style="max-width: 700px; margin-left: 1rem;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{% static 'images/pest-control.jpg' %}" alt="..." style="max-width: 100%; max-height: 100%">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Pest Control</h5>
+          <p class="card-text">Get pest control experts to get rid of the pesky bugs and infestations in your house</p>
+           <a href="#" class="btn btn-primary">Book appointment</a>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+     <div class="grid-item">
+      <div class="card mb-3 hover-overlay ripple shadow-1-strong" data-mdb-ripple-color="light" style="max-width: 700px; margin-left: 1rem;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{% static 'images/plumbing.webp' %}" alt="..." style="max-width: 100%; max-height: 100%">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Plumbing</h5>
+          <p class="card-text">Get pest control experts to get rid of the pesky bugs and infestations in your house</p>
+           <a href="#" class="btn btn-primary">Book appointment</a>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+    <div class="grid-item">
+      <div class="card mb-3 hover-overlay ripple shadow-1-strong" data-mdb-ripple-color="light" style="max-width: 700px; margin-left: 1rem;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{% static 'images/sanitisation.jpg' %}" alt="..." style="max-width: 100%; max-height: 100%">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Sanitization</h5>
+          <p class="card-text">Sanitize your house with with our trained experts, using industry grade chemicals</p>
+           <a href="#" class="btn btn-primary">Book appointment</a>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+ </div>
+</div>
 
+{#    {% for task in tasks %}#}
+{##}
+{#    {% endfor %}#}
 
+    <footer style="margin-top: 2rem">
+    {% include 'footer.html' %}
+    </footer>
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"
+></script>
+    <!--Masonry CDN -->
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<!-- or -->
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
 
-{% endblock %}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+{% endblock %}
 </body>
 </html>
