@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^', include('allauth.urls')),
     path('test/', views.test_view, name='test'),
     path('services/<str:city>/', views.city_view, name='city'),
+    path('services/<str:city>/<str:category>', views.appointment_booking_view, name='appointment-booking'),
     path('accounts/', include('allauth.urls')),
     path('customer/dashboard', views.customer_dashboard_view, name="dashboard"),
     path('employee/dashboard', views.employee_dashboard_view, name="dashboard"),

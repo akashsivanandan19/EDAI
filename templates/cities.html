@@ -31,7 +31,7 @@
     {% include 'navbar.html' %}
     <div class="container-md text-center" style="margin-top: 2rem; font-size: xx-large; margin-bottom: 2rem">Services available in your neighbourhood</div>
     </header>
-    <main></main>
+    <main>
 {#<table class="table table-striped table-bordered">#}
 {#  <thead>#}
 {#    <tr>#}
@@ -63,7 +63,19 @@
       <div class="card-body">
         <h5 class="card-title">AC service and repair</h5>
           <p class="card-text">Get certified professionals for servicing, repair and installation of your air conditioners</p>
-           <a href="#" class="btn btn-primary">Book appointment</a>
+           {% if city == 'Pune' %}
+               <a href="/services/Pune/ac" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+           {% if city == 'Mumbai' %}
+               <a href="/services/Mumbai/ac" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+       {% if city == 'Bangalore' %}
+               <a href="/services/Bangalore/ac" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+       {% if city == 'Delhi' %}
+               <a href="/services/Delhi/ac" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+
       </div>
     </div>
   </div>
@@ -78,7 +90,18 @@
       <div class="card-body">
         <h5 class="card-title">Pest Control</h5>
           <p class="card-text">Get pest control experts to get rid of the pesky bugs and infestations in your house</p>
-           <a href="#" class="btn btn-primary">Book appointment</a>
+          {% if city == 'Pune' %}
+               <a href="/services/Pune/pest-control" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+           {% if city == 'Mumbai' %}
+               <a href="/services/Mumbai/pest-control" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+       {% if city == 'Bangalore' %}
+               <a href="/services/Bangalore/pest-control" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+       {% if city == 'Delhi' %}
+               <a href="/services/Delhi/pest-control" class="btn btn-primary">Book appointment</a>
+          {% endif %}
       </div>
     </div>
   </div>
@@ -94,7 +117,18 @@
       <div class="card-body">
         <h5 class="card-title">Plumbing</h5>
           <p class="card-text">Get pest control experts to get rid of the pesky bugs and infestations in your house</p>
-           <a href="#" class="btn btn-primary">Book appointment</a>
+           {% if city == 'Pune' %}
+               <a href="/services/Pune/plumbing" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+           {% if city == 'Mumbai' %}
+               <a href="/services/Mumbai/plumbing" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+       {% if city == 'Bangalore' %}
+               <a href="/services/Bangalore/plumbing" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+       {% if city == 'Delhi' %}
+               <a href="/services/Delhi/plumbing" class="btn btn-primary">Book appointment</a>
+          {% endif %}
       </div>
     </div>
   </div>
@@ -110,7 +144,18 @@
       <div class="card-body">
         <h5 class="card-title">Sanitization</h5>
           <p class="card-text">Sanitize your house with with our trained experts, using industry grade chemicals</p>
-           <a href="#" class="btn btn-primary">Book appointment</a>
+          {% if city == 'Pune' %}
+               <a href="/services/Pune/sanitization" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+           {% if city == 'Mumbai' %}
+               <a href="/services/Mumbai/sanitization" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+       {% if city == 'Bangalore' %}
+               <a href="/services/Bangalore/sanitization" class="btn btn-primary">Book appointment</a>
+          {% endif %}
+       {% if city == 'Delhi' %}
+               <a href="/services/Delhi/sanitization" class="btn btn-primary">Book appointment</a>
+          {% endif %}
       </div>
     </div>
   </div>
@@ -118,7 +163,7 @@
   </div>
  </div>
 </div>
-
+</main>
 {#    {% for task in tasks %}#}
 {##}
 {#    {% endfor %}#}

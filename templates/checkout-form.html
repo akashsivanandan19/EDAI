@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<form>
+  <!-- Text input -->
+  <div class="form-outline mb-4">
+    <input type="text" id="form6Example3" class="form-control" value="{{ user.name }}" readonly/>
+    <label class="form-label" for="form6Example3">Name</label>
+  </div>
+
+  <!-- Text input -->
+  <div class="form-outline mb-4">
+    <input type="text" id="form6Example4" class="form-control" value="{{ employer.address }}"  />
+    <label class="form-label" for="form6Example4">Address</label>
+  </div>
+
+
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="email" id="form6Example5" class="form-control" value="{{ user.email }}" readonly/>
+    <label class="form-label" for="form6Example5">Email</label>
+  </div>
+
+  <!-- Number input -->
+  <div class="form-outline mb-4">
+    <input type="tel" id="form6Example6" class="form-control" value="{{ user.phno }}"  readonly/>
+    <label class="form-label" for="form6Example6">Phone</label>
+  </div>
+
+
+    {% include 'categorypicker.html' %}
+    {% include 'datepicker.html'%}
+    {% include 'citypicker.html' %}
+
+<!-- Message input -->
+  <div class="form-outline mb-4">
+    <textarea class="form-control" id="form6Example7" rows="4"></textarea>
+    <label class="form-label" for="form6Example7">Additional information</label>
+  </div>
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block mb-4">Confirm Appointment</button>
+</form>
+</body>
+</html>

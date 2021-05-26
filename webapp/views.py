@@ -42,13 +42,14 @@ def test_view(request):
     context = {
         'tasks': tasks
     }
-    return render(request, "contact.html", context)
+    return render(request, "appointment_booking.html", context)
 
 
 def city_view(request, city):
     tasks = Task.objects.filter(city=city)
     context = {
-        'tasks': tasks
+        'tasks': tasks,
+        'city': city
     }
     return render(request, "cities.html", context)
 
@@ -75,3 +76,17 @@ def profile_view(request):
             # print(form.__dict__)
 
     return render(request, "profile.html")
+
+
+def appointment_booking_view(request, city, category):
+    city = city
+    category = category
+    user = CustomUser.objects.get(email=request.user)
+    employer = Employer.objects.get(email=user)
+    context = {
+        'city': city,
+        'category': category,
+        'employer': employer
+    }
+
+    return render(request, "appointment_booking.html", context)
