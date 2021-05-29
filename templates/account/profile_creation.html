@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block extra_head %}
+        {% include 'cdn_libraries.html' %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    <header>
+    {% include 'navbar.html' %}
+    </header>
+
+    <main>
+    <div class="container-fluid">
+     <div class="col-md-5 mx-auto my-4">
+<form method="post">
+
+
+  <!-- Name input -->
+  <div class="form-outline mb-4">
+    <input type="text" id="form6Example3" class="form-control"/>
+    <label class="form-label" for="form6Example3">Name</label>
+  </div>
+
+   <!-- Phone Number input -->
+     <div class="row">
+         <div class="col">
+          <div class="form-outline mb-4">
+        <input type="text" id="prefix" name = "prefix" class="form-control" value="+91" readonly/>
+      </div>
+         </div>
+     <div class="col">
+      <div class="form-outline mb-4">
+          <input type  = "tel" class="form-control" id = "phno" />
+          <label class="form-label" for="phno">Phone Number</label>
+      </div>
+       </div>
+         </div>
+
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="email" id="form6Example5" class="form-control" value="{{ user.email }}" readonly/>
+    <label class="form-label" for="form6Example5">Email</label>
+  </div>
+
+    <!--Address  input -->
+    <div class="form-outline">
+  <textarea class="form-control" id="textAreaExample" rows="4" style="margin-bottom: 1.5rem;"></textarea>
+  <label class="form-label" for="textAreaExample">Address</label>
+</div>
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block mb-4">Confirm Appointment</button>
+</form>
+     </div>
+    </div>
+    </main>
+
+    <footer>
+    {% include 'footer.html' %}
+    </footer>
+{% include 'cdn_js.html' %}
+{% endblock %}
+</body>
+</html>

@@ -41,36 +41,6 @@
   </div>
             <div class="card-body">
 
-{#<div class="row">#}
-{#  <div class="col">#}
-{#    <!-- Name input -->#}
-{#    <div class="form-outline">#}
-{#      <input type="text" id="form8Example1" class="form-control min-vw-100" value="{{ user.name }}" />#}
-{#      <label class="form-label" for="form8Example1">Name</label>#}
-{#    </div>#}
-{#  </div>#}
-{##}
-{#<div class="row" style="margin-top: 1.5rem">#}
-{#  <div class="col">#}
-{#    <!-- Name input -->#}
-{#    <div class="form-outline">#}
-{#      <input type="tel" id="form8Example2" class="form-control min-vw-100" value="{{ user.phno }}" />#}
-{#      <label class="form-label" for="form8Example2">Phone number</label>#}
-{#    </div>#}
-{#  </div>#}
-{##}
-{# <div class="row" style="margin-top: 1.5rem">#}
-{#  <div class="col">#}
-{#    <!-- Email input -->#}
-{#    <div class="form-outline">#}
-{#      <input type="email" id="form8Example3" class="form-control min-vw-100" value="{{ user.email }}" />#}
-{#      <label class="form-label" for="form8Example3">Email</label>#}
-{#    </div>#}
-{#  </div>#}
-{##}
-{#</div>#}
-{#</div>#}
-{#</div>#}
       <form method="post">
         {% csrf_token %}
         {{ form.errors }}

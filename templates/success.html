@@ -1,0 +1,20 @@
+{% extends 'message_template.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block extra_head%}
+    <title>Success</title>
+    {% endblock %}
+</head>
+<body>
+{% block title %}Success!{% endblock %}
+{% block content %}
+    <div class ="container justify-content-center">
+       <h5> Your request has been received </h5>
+    <br>
+          <a class="btn btn-primary btn-block mb-4" href="/" style="margin-top: 4rem" >Go back to the home page</a>
+    </div>
+{% endblock %}
+</body>
+</html>

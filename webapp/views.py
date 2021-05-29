@@ -1,12 +1,8 @@
-from allauth.account.views import SignupView
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
-from allauth.account.views import LoginView, LogoutView
-
 # Create your views here.
-from webapp.forms import ContactForm, CustomSignupForm, EditProfileForm, CheckoutForm, ProfessionalSignupForm
+from webapp.forms import ContactForm, EditProfileForm, CheckoutForm, ProfessionalSignupForm
 from webapp.models import Contact, Task, CustomUser, Employer, Employee
 
 
@@ -37,14 +33,6 @@ def employee_dashboard_view(request):
         'tasks': tasks
     }
     return render(request, "dashboard.html", context)
-
-
-def test_view(request):
-    tasks = Task.objects.all()
-    context = {
-        'tasks': tasks
-    }
-    return render(request, "appointment_booking.html", context)
 
 
 def city_view(request, city):
@@ -129,6 +117,7 @@ def profile_view(request):
     return render(request, "profile.html", context)
 
 
+@login_required
 def appointment_booking_view(request, city, category):
     city = city
     category = category
@@ -191,3 +180,11 @@ def professional_signup_view(request):
             print(form.errors)
 
     return render(request, "account/professional_signup.html")
+
+
+def success_view(request):
+    return render(request, 'success.html')
+
+
+def test_view(request):
+    return render(request, 'account/profile_creation.html')
