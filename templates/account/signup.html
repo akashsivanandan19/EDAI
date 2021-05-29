@@ -21,8 +21,10 @@
     <title>Signup</title>
 </head>
 <body>
+<header>
 {% include 'navbar.html' %}
-
+</header>
+<main>
 <div class="container">
   <div class="row">
     <div class="col-md-5 mx-auto my-4">
@@ -61,11 +63,20 @@
       </div>
 
       <!-- Phone Number input -->
+     <div class="row">
+         <div class="col">
+          <div class="form-outline mb-4">
+        <input type="text" id="prefix" name = "prefix" class="form-control" value="+91" readonly/>
+      </div>
+         </div>
+     <div class="col">
       <div class="form-outline mb-4">
 {#          <input type  = "tel" class="form-control" id = "{{ form.phno.name }}" />#}
           {{ form.phno }}
           <label class="form-label" for="{{ form.phno.name }}">Phone Number</label>
       </div>
+       </div>
+         </div>
 
       <!-- Email input -->
       <div class="form-outline mb-4">
@@ -73,7 +84,6 @@
           {{ form.email }}
         <label class="form-label" for="{{ form.email.name }}">Email</label>
       </div>
-
 
       <!-- Password input -->
       <div class="form-outline mb-4">
@@ -89,8 +99,14 @@
         <label class="form-label" for="{{ form.password2.name }}">Repeat password</label>
       </div>
 
+         <!-- Address input -->
+         <div class="form-outline mb-4">
+        <input type="text" style="height: 100px" class="form-control" name="address" id="address"/>
+        <label class="form-label" for="address">Address</label>
+      </div>
+
       <!-- Submit button -->
-      <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+      <button type="submit" class="btn btn-primary btn-block mb-3">Create account</button>
         <div class="text-center">
         <p>Have an account? <a href="/accounts/login">Sign in</a></p>
       </div>
@@ -98,8 +114,11 @@
   </div>
       </div>
 </div>
+    </main>
 <!-- Pills content -->
-
+<footer>
+    {% include 'footer.html' %}
+</footer>
 <!-- MDB -->
 <script
   type="text/javascript"

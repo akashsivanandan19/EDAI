@@ -1,7 +1,9 @@
+{% extends 'base.html' %}
  {% load static %}
  <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% block extra_head %}
     <!-- Font Awesome -->
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -19,8 +21,11 @@
 />
     <meta charset="UTF-8">
     <title>Login</title>
+
+    {% endblock %}
 </head>
 <body>
+{% block content %}
 {% include 'navbar.html' %}
 
 <div class="container">
@@ -112,5 +117,6 @@
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"
 ></script>
+{% endblock %}
 </body>
 </html>

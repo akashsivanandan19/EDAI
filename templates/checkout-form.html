@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-<form>
+<form method="post">
   <!-- Text input -->
   <div class="form-outline mb-4">
     <input type="text" id="form6Example3" class="form-control" value="{{ user.name }}" readonly/>
@@ -10,7 +10,7 @@
 
   <!-- Text input -->
   <div class="form-outline mb-4">
-    <input type="text" id="form6Example4" class="form-control" value="{{ employer.address }}"  />
+    <input type="text" id="form6Example4" class="form-control" value="{{ user.address }}"  />
     <label class="form-label" for="form6Example4">Address</label>
   </div>
 

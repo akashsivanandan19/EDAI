@@ -98,27 +98,37 @@
         <label class="form-label" for="email">Email</label>
       </div>
 
+          {% if type == 'employer' %}
            <!-- Address input -->
       <div class="form-outline mb-4">
-        <input type="text" style="height: 100px" class="form-control" name="address" id="address" />
+        <input type="text" style="height: 100px" class="form-control" name="address" id="address" value="{{ employer.address}}"/>
+        <label class="form-label" for="address">Address</label>
+      </div>
+      {% endif %}
+
+       {% if type == 'employee' %}
+           <!-- Experience input -->
+      <div class="form-outline mb-4">
+        <input type="text" style="height: 100px" class="form-control" name="address" id="address" value="{{ employee }}"/>
 {#          {{ form.email }}#}
         <label class="form-label" for="address">Address</label>
       </div>
+      {% endif %}
 
 
 
       <!-- Submit button -->
-      <button type="submit" class="btn btn-primary btn-block mb-3">Save changes</button>
+      <button type="submit" class="btn btn-primary btn-block mb-3" data-mdb-toggle="modal"
+              data-mdb-target="#exampleModal">Save changes</button>
         <div class="text-center">
       </div>
+          <!-- Modal -->
     </form>
 
     </div>
 </div>
     </div>
 </div>
-
-
 
 
 <!-- MDB -->

@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.db import models
@@ -15,6 +17,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=30, blank=True, null=True, default=None)
     phno = PhoneNumberField(blank=True)
+    address = models.CharField(max_length=300, blank=False, null=False, default="Pune")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'phno']
@@ -27,18 +30,37 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class Employer(models.Model):
     email = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    address = models.CharField(max_length=300, blank=False, null=False)
+    # address = models.CharField(max_length=300, blank=False, null=False)
 
     def __str__(self):
         return str(self.email)
 
 
 class Employee(models.Model):
+    ELECTRICIAN = 'E'
+    PEST_CONTROL = 'P'
+    SANITIZATION = 'S'
+    PLUMBING = 'M'
+
+    CATEGORY =(
+        (ELECTRICIAN, 'Electrician'),
+        (PEST_CONTROL, 'Pest Control'),
+        (SANITIZATION, 'Sanitization'),
+        (PLUMBING, 'Plumbing'),
+    )
+
     email = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     experience = models.IntegerField(null=False, blank=False)
+    category = models.CharField(
+        max_length=1,
+        choices=CATEGORY,
+        default=None,
+        blank=False,
+        null=True,
+    )
 
     def __str__(self):
-        return self.email
+        return str(self.email)
 
 
 class Review(models.Model):
@@ -58,14 +80,21 @@ class Contact(models.Model):
 
 
 class Task(models.Model):
+    AC = 'A'
+    PEST = 'P'
+    SANITIZATION = 'S'
+    PLUMBING = 'M'
     ASSIGNED = 'A'
     WAITING = 'W'
     IN_PROGRESS = 'P'
     COMPLETED = 'C'
-    PUNE = 'Pune'
-    MUMBAI = 'Mumbai'
-    BANGALORE = 'Bangalore'
-    DELHI = 'Delhi'
+    TOMORROW = 'T'
+    THIS_WEEK = 'W'
+    THIS_MONTH = 'M'
+    PUNE = 'P'
+    MUMBAI = 'M'
+    BANGALORE = 'B'
+    DELHI = 'D'
     JOB_STATUS = (
         (ASSIGNED, 'Assigned'),
         (WAITING, 'Waiting'),
@@ -78,19 +107,46 @@ class Task(models.Model):
         (BANGALORE, 'Bangalore'),
         (DELHI, 'Delhi'),
     )
+    PREFERENCE = (
+        (TOMORROW, 'Tomorrow'),
+        (THIS_WEEK, 'This week'),
+        (THIS_MONTH, 'This month'),
+    )
+
+    CATEGORIES = (
+        (AC, 'AC repair and servicing'),
+        (PEST, 'Pest control'),
+        (PLUMBING, 'Plumbing work'),
+        (SANITIZATION, 'Sanitization'),
+
+    )
+
     employer = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     description = models.CharField(max_length=300, blank=False, null=True)
     city = models.CharField(max_length=10, blank=False, null=True,
                             choices=CITY,
                             default=ASSIGNED, )
-    name = models.CharField(max_length=100, blank=False, null=True)
+    address = models.CharField(max_length=300, blank=False, null=False, default="address")
+    # name = models.CharField(max_length=100, blank=False, null=True)
     employee = models.EmailField(_("email address"), unique=True)
-    category = models.CharField(max_length=20, blank=False, null=True)
+    category = models.CharField(
+        max_length=1,
+        choices=CATEGORIES,
+        default=None,
+        blank=False,
+        null=True,
+    )
     status = models.CharField(
         max_length=1,
         choices=JOB_STATUS,
-        default=ASSIGNED,
+        default=WAITING,
     )
+    preference = models.CharField(
+        max_length=1,
+        choices=PREFERENCE,
+        default=TOMORROW,
+    )
+    issue_date = models.DateField(default=datetime.date.today)
 
     def __str__(self):
-        return self.name
+        return self.description

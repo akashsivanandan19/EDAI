@@ -5,31 +5,31 @@
              <label for="form-selection3 mb-4" style="margin-top: 1rem">Confirm your service category</label>
              <select class="form-select" aria-label="Default select example" id ="form-selection3" style=" margin-top: 1rem;margin-bottom: 1rem">
              {% if category == "ac" %}
-                  <option selected value="1">AC servicing</option>
-                  <option value="2">Pest control</option>
-                  <option value="3">Plumbing</option>
-                  <option value="4">Sanitization</option>
+                  <option selected value="A">AC servicing</option>
+                  <option value="P">Pest control</option>
+                  <option value="M">Plumbing</option>
+                  <option value="S">Sanitization</option>
                  {% endif %}
 
              {% if category == "sanitization" %}
-                  <option selected value="1">Sanitization</option>
-                  <option value="2">Pest control</option>
-                  <option value="3">Plumbing</option>
-                  <option value="4">AC servicing</option>
+                  <option selected value="S">Sanitization</option>
+                  <option value="P">Pest control</option>
+                  <option value="M">Plumbing</option>
+                  <option value="A">AC servicing</option>
                  {% endif %}
 
              {% if category == "plumbing" %}
-                  <option selected value="1">Plumbing</option>
-                  <option value="2">Pest control</option>
-                  <option value="3">AC servicing</option>
-                  <option value="4">Sanitization</option>
+                  <option selected value="M">Plumbing</option>
+                  <option value="P">Pest control</option>
+                  <option value="A">AC servicing</option>
+                  <option value="S">Sanitization</option>
                  {% endif %}
 
              {% if category == "pest-control" %}
-                  <option selected value="1">Pest control</option>
-                  <option value="2">AC servicing</option>
-                  <option value="3">Plumbing</option>
-                  <option value="4">Sanitization</option>
+                  <option selected value="P">Pest control</option>
+                  <option value="A">AC servicing</option>
+                  <option value="M">Plumbing</option>
+                  <option value="S">Sanitization</option>
                  {% endif %}
              </select>
 

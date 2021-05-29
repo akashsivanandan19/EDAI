@@ -16,7 +16,7 @@ Including another URL conf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
 from webapp import views
 
@@ -33,6 +33,7 @@ urlpatterns = [
     path('services/<str:city>/', views.city_view, name='city'),
     path('services/<str:city>/<str:category>', views.appointment_booking_view, name='appointment-booking'),
     path('accounts/', include('allauth.urls')),
+    path('account/signup/professional', views.professional_signup_view, name='signup'),
     path('customer/dashboard', views.customer_dashboard_view, name="dashboard"),
     path('employee/dashboard', views.employee_dashboard_view, name="dashboard"),
     path('', views.landing_view, name="home"),
