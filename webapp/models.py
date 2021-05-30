@@ -11,14 +11,15 @@ from .managers import CustomUserManager
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    PUNE = "Pune"
     email = models.EmailField(_('email address'), unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=30, blank=True, null=True, default=None)
     phno = PhoneNumberField(blank=True)
-    address = models.CharField(max_length=300, blank=False, null=False, default="Pune")
-
+    address = models.CharField(max_length=300, blank=False, null=False, default=PUNE)
+    city = models.CharField(max_length=30, blank=False, null=False, default=PUNE)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'phno']
 
