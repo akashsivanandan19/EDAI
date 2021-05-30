@@ -128,7 +128,7 @@ class Task(models.Model):
                             default=ASSIGNED, )
     address = models.CharField(max_length=300, blank=False, null=False, default="address")
     # name = models.CharField(max_length=100, blank=False, null=True)
-    employee = models.EmailField(_("email address"), unique=True)
+    employee = models.EmailField(_("email address"), unique=False)
     category = models.CharField(
         max_length=1,
         choices=CATEGORIES,
