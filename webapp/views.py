@@ -32,7 +32,7 @@ def landing_view(request):
 @login_required
 def customer_dashboard_view(request):
     user = CustomUser.objects.get(email=request.user.email)
-    task = Task.objects.get(employer=user)
+    task = Task.objects.filter(employer=user)
     context = {
         'tasks': task
     }
