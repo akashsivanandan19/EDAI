@@ -81,27 +81,20 @@ def profile_view(request):
             address = form.cleaned_data['address']
             user = CustomUser.objects.get(email=request.user)
 
-            # if exists(user):
-            #     pass
-
             user.name = name
             user.email = email
             user.phno = phno
             user.address = address
             user.save()
-            # print(form.__dict__)
             print(form.errors)
 
             obj, created = CustomUser.objects.update_or_create(
                 name=name, email=email, phno=phno,
-                # defaults={'first_name': 'Bob'},
             )
             obj.save()
-            # return redirect('/profile/')
 
         else:
             print(form.errors)
-            # print(form.__dict__)
 
     return render(request, "profile.html", context)
 
@@ -110,7 +103,6 @@ def profile_view(request):
 def appointment_booking_view(request, city, category):
     city = city
     category = category
-    # user = CustomUser.objects.get(email=request.user)
     if CustomUser.objects.get(email=request.user):
         user = CustomUser.objects.get(email=request.user)
         context = {
@@ -200,10 +192,3 @@ def profile_creation_view(request):
 
     return render(request, 'account/profile_creation.html')
 
-# def sign_in_processor(request):
-#     user = request.user
-#     required = ['address', 'name', 'phno']
-#     for f in required:
-#         if not f:
-#             return redirect('/test')
-#     return redirect('/')
