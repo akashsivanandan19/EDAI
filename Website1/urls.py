@@ -34,7 +34,7 @@ urlpatterns = [
     path('services/<str:city>/<str:category>', views.appointment_booking_view, name='appointment-booking'),
     path('accounts/', include('allauth.urls')),
     path('account/signup/professional', views.professional_signup_view, name='signup'),
-    path('customer/dashboard', views.customer_dashboard_view, name="dashboard"),
+    path('dashboard', views.customer_dashboard_view, name="dashboard"),
     path('employee/dashboard', views.employee_dashboard_view, name="dashboard"),
     path('', views.landing_view, name="home"),
     path('success/', views.success_view, name="success"),

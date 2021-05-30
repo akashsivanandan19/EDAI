@@ -29,8 +29,14 @@ def landing_view(request):
     return render(request, "index.html")
 
 
+@login_required
 def customer_dashboard_view(request):
-    return render(request, "dashboard.html")
+    user = CustomUser.objects.get(email=request.user.email)
+    task = Task.objects.get(employer=user)
+    context = {
+        'tasks': task
+    }
+    return render(request, "dashboard.html", context)
 
 
 def employee_dashboard_view(request):
@@ -191,4 +197,3 @@ def profile_creation_view(request):
             print(form.errors)
 
     return render(request, 'account/profile_creation.html')
-
