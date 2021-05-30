@@ -105,3 +105,7 @@ class ProfileCreationForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
     address = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
     phno = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+
+
+class SubmitServiceRequestForm(forms.Form):
+    task_id = forms.CharField(required=True)

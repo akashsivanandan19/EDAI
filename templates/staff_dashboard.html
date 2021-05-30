@@ -22,10 +22,16 @@
 <div class="grid">
 <div class="row row-cols-2 row-cols-md-2 justify-content-center" style="margin-left: 3rem">
     {% for task in tasks %}
+  {% if task.status == 'W' %}
     <div class="col-sm" style="max-width: 600px; min-width: 300px;">
     <div class="grid-item">
+
 <div class="card text-center border border-primary" style="min-height: 250px; margin-top: 3rem;">
+
   <div class="card-body">
+   <form method="post">
+   {% csrf_token %}
+
     <h5 class="card-title">
         {% if task.category == 'A' %}AC repair and servicing {% endif %}
         {% if task.category == 'P' %}Pest control {% endif %}
@@ -45,12 +51,22 @@
     <br>
      Request description: {{ task.description }}
     </p>
-    <a href="#" class="btn btn-primary">Apply for task</a>
+<input type="hidden" name="task_id" value="{{ task.id }}">
+   <!-- Submit button -->
+
+   <div class="container text-center">
+      <button type="submit" class="btn btn-primary btn-block">Apply for task</button>
+   </div>
+
+
+      </form>
   </div>
   <div class="card-footer text-muted"> Request date: {{ task.issue_date }}</div>
 </div>
+
     </div>
     </div>
+         {% endif %}
     {% endfor %}
     </div>
 </div>

@@ -51,7 +51,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Employee(models.Model):
-    ELECTRICIAN = 'E'
+    ELECTRICIAN = 'A'
     PEST_CONTROL = 'P'
     SANITIZATION = 'S'
     PLUMBING = 'M'
@@ -167,7 +167,7 @@ class Task(models.Model):
 
 
 class ServiceRequest(models.Model):
-    assigned_employee = models.OneToOneField(
+    request_placed_employee = models.ForeignKey(
         Employee,
         on_delete=models.CASCADE)
     task = models.OneToOneField(Task,

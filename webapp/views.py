@@ -1,9 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
-from webapp.forms import ContactForm, EditProfileForm, CheckoutForm, ProfessionalSignupForm, ProfileCreationForm
-from webapp.models import Contact, Task, CustomUser, Employee
+from django.views.generic import DetailView
+
+from webapp.forms import ContactForm, EditProfileForm, CheckoutForm, ProfessionalSignupForm, ProfileCreationForm, \
+    SubmitServiceRequestForm
+from webapp.models import Contact, Task, CustomUser, Employee, ServiceRequest
 
 
 def landing_view(request):
@@ -49,7 +52,28 @@ def customer_dashboard_view(request):
     return render(request, "dashboard.html", context)
 
 
+# def task_detail_view(request, task_id):
+#     task_obj = get_object_or_404(Task, name=task_id)
+#     context = {
+#         'task': task_obj
+#     }
+#     return render(request, '/task/details')
+
+
 def employee_dashboard_view(request):
+    if request.method == 'POST':
+        form = SubmitServiceRequestForm(request.POST)
+        if form.is_valid():
+            task_id = form.cleaned_data['task_id']
+            task = Task.objects.get(id=task_id)
+            service_request = ServiceRequest()
+            service_request.task = task
+            service_request.request_placed_employee = Employee.objects.get(
+                email=CustomUser.objects.get(email=request.user.email))
+            service_request.save()
+        else:
+            print(form.errors)
+
     user = CustomUser.objects.get(email=request.user.email)
     employee = Employee.objects.get(email=user)
     tasks = Task.objects.filter(category=employee.category)
@@ -234,3 +258,6 @@ def check_employee(request):
 
         except:
             pass
+
+# TODO make two more webpges. One for the employees to view all their service requests that have been generated and
+#  one for the company staff to assign appropriate people to perform the tasks

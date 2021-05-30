@@ -34,9 +34,9 @@ admin.site.register(Employee)
 
 @admin.register(ServiceRequest)
 class ServiceRequestAdmin(admin.ModelAdmin):
-    list_display = ('task', 'assigned_employee')
-    ordering = ('task', 'assigned_employee')
-    search_fields = ('task', 'assigned_employee')
+    list_display = ('task', 'request_placed_employee')
+    ordering = ('task', 'request_placed_employee')
+    search_fields = ('task', 'request_placed_employee')
 
 
 @admin.register(Task)
