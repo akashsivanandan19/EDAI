@@ -78,6 +78,7 @@ def employee_dashboard_view(request):
     employee = Employee.objects.get(email=user)
     tasks = Task.objects.filter(category=employee.category)
     context = {
+        'employee': employee,
         'tasks': tasks
     }
     return render(request, "staff_dashboard.html", context)
@@ -258,6 +259,20 @@ def check_employee(request):
 
         except:
             pass
+
+
+def request_view(request):
+
+    user = CustomUser.objects.get(email=request.user.email)
+    employee = Employee.objects.get(email=user)
+    tasks = Task.objects.filter(category=employee.category)
+    requests = ServiceRequest.objects.filter(request_placed_employee=employee)
+    context = {
+        'tasks': tasks,
+        'employee': employee,
+        'requests': requests,
+    }
+    return render(request, 'request_viewing.html', context)
 
 # TODO make two more webpges. One for the employees to view all their service requests that have been generated and
 #  one for the company staff to assign appropriate people to perform the tasks

@@ -172,6 +172,7 @@ class ServiceRequest(models.Model):
         on_delete=models.CASCADE)
     task = models.OneToOneField(Task,
                                 on_delete=models.CASCADE)
+    request_date = models.DateField(default=datetime.date.today)
 
     def __str__(self):
         return str(self.task.description)

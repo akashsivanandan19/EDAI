@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block extra_head%}
+        {% include 'cdn_libraries.html' %}
+    <meta charset="UTF-8">
+    <title>View your Requests</title>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    <header>
+{% include 'navbar.html' %}
+</header>
+
+<main>
+<div class="container-md text-center" style="margin-top: 2rem; font-size: xx-large">Your Requests</div>
+
+{#<div class="container-md text-center" style="margin-top: 2rem; font-size: x-large">Assigned </div>#}
+
+<div class="grid">
+<div class="row row-cols-2 row-cols-md-2 justify-content-center" style="margin-left: 3rem">
+    {% for request_item in requests %}
+
+    <div class="col-sm" style="max-width: 600px; min-width: 300px;">
+    <div class="grid-item">
+
+<div class="card text-center border border-primary" style="min-height: 200px; margin-top: 3rem;">
+
+  <div class="card-body">
+    <h5 class="card-title">
+        {% if request_item.task.category == 'A' %}AC repair and servicing {% endif %}
+        {% if request_item.task.category == 'P' %}Pest control {% endif %}
+        {% if request_item.task.category == 'S' %}Sanitization {% endif %}
+        {% if request_item.task.category == 'M' %}Plumbing {% endif %}
+    </h5>
+    <p class="card-text">
+        Request status: <span style="color: darkslateblue">{% if request_item.task.status == 'A' %}Assigned {% endif %}</span>
+        <span style="color: green">{% if request_item.task.status == 'W' %}Available {% endif %}</span>
+        <span style="color: darkgoldenrod">{% if  request_item.task.status == 'P' %}In progress {% endif %}</span>
+        <span style="color: slategray">{% if  request_item.task.status == 'C' %}Completed {% endif %}</span>
+     <br>
+     City: {% if request_item.task.city == 'M' %}Mumbai{% endif %}
+     {% if request_item.task.city == 'P' %}Pune{% endif %}
+     {% if request_item.task.city == 'B' %}Bangalore{% endif %}
+     {% if request_item.task.city == 'D' %}Delhi{% endif %}
+    <br>
+     Request description: {{ request_item.task.description }}
+    </p>
+
+  </div>
+  <div class="card-footer text-muted"> Request date: {{ request_item.request_date }}</div>
+</div>
+
+    </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+</main>
+
+
+    {% include 'cdn_js.html' %}
+{% endblock %}
+</body>
+</html>
