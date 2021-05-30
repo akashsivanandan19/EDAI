@@ -76,9 +76,16 @@
 									<li>
 										<a class="dropdown-item" href="/profile">Edit profile</a>
 									</li>
+                                    {% if employee != None %}
+                                        <li>
+										<a class="dropdown-item" href="/employee/dashboard">E Dashboard</a>
+									</li>
+                                        {% endif %}
+                                 {% if employee is None %}
 									<li>
 										<a class="dropdown-item" href="/dashboard">Dashboard</a>
 									</li>
+                                     {% endif %}
 									<li>
 										<hr class="dropdown-divider" />
 									</li>
@@ -88,6 +95,7 @@
 								</ul>
 							</li>
           {% endif %}
+                        </ul>
 
 						</div>
 					</div>

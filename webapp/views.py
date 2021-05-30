@@ -7,6 +7,12 @@ from webapp.models import Contact, Task, CustomUser, Employee
 
 
 def landing_view(request):
+    context = None
+    if check_employee(request):
+        employee = Employee.objects.get(email=CustomUser.objects.get(email=request.user.email))
+        context = {
+            'employee': employee
+        }
     if request.user.is_authenticated:
         user = CustomUser.objects.get(email=request.user.email)
         if user.name is None:
@@ -26,7 +32,7 @@ def landing_view(request):
             contact.save()
         else:
             print(form.errors)
-    return render(request, "index.html")
+    return render(request, "index.html", context)
 
 
 @login_required
@@ -36,15 +42,21 @@ def customer_dashboard_view(request):
     context = {
         'tasks': task
     }
+    if check_employee(request):
+        pass
+        # TODO return a redirect to the employee dashboard
+
     return render(request, "dashboard.html", context)
 
 
 def employee_dashboard_view(request):
-    tasks = Task.objects.all()
+    user = CustomUser.objects.get(email=request.user.email)
+    employee = Employee.objects.get(email=user)
+    tasks = Task.objects.filter(category=employee.category)
     context = {
         'tasks': tasks
     }
-    return render(request, "dashboard.html", context)
+    return render(request, "staff_dashboard.html", context)
 
 
 def city_view(request, city):
@@ -197,3 +209,18 @@ def profile_creation_view(request):
             print(form.errors)
 
     return render(request, 'account/profile_creation.html')
+
+
+def check_employee(request):
+    if request.user.is_authenticated:
+        user = CustomUser.objects.get(email=request.user.email)
+        try:
+            employee_object = Employee.objects.filter(email=user)
+            if employee_object:
+                return True
+            else:
+                return False
+
+
+        except:
+            pass
