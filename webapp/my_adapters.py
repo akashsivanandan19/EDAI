@@ -1,11 +1,10 @@
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 
-
-class SocialAccountAdapter(DefaultSocialAccountAdapter):
-    ...
-
-    def save_user(self, request, sociallogin, form=None):
-        super(DefaultSocialAccountAdapter, self).save_user(request, sociallogin, form=form)
-        # your logic here... and return redirection afterward
-        return redirect('accounts/create/profile')
+#
+# class MySocialAccountAdapter(DefaultSocialAccountAdapter):
+#
+#     def save_user(self, request, sociallogin, form=None):
+#         super(DefaultSocialAccountAdapter, self).save_user(request, sociallogin, form=form)
+#         # your logic here... and return redirection afterward
+#         return redirect('accounts/create/profile')

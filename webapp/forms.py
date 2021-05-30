@@ -100,3 +100,9 @@ class CheckoutForm(forms.Form):
 class ProfessionalSignupForm(forms.Form):
     experience = forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control"}))
     category = forms.CharField(widget=forms.TextInput(attrs={"class": "form-select"}))
+
+
+class ProfileCreationForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    address = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    phno = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))

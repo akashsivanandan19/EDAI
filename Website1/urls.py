@@ -29,7 +29,7 @@ urlpatterns = [
     # ),
     url(r'^', include('allauth_2fa.urls')),
     url(r'^', include('allauth.urls')),
-    path('test/', views.test_view, name='test'),
+    # path('test/', views.test_view, name='test'),
     path('services/<str:city>/', views.city_view, name='city'),
     path('services/<str:city>/<str:category>', views.appointment_booking_view, name='appointment-booking'),
     path('accounts/', include('allauth.urls')),
@@ -38,5 +38,6 @@ urlpatterns = [
     path('employee/dashboard', views.employee_dashboard_view, name="dashboard"),
     path('', views.landing_view, name="home"),
     path('success/', views.success_view, name="success"),
+    path('accounts/profile/create', views.profile_creation_view, name='profile-create'),
     path('profile/', views.profile_view, name="profile"), ]
 # path("employee/signup", views.employee_signup, name="employee-login"),

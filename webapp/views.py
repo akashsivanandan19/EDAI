@@ -2,11 +2,15 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from webapp.forms import ContactForm, EditProfileForm, CheckoutForm, ProfessionalSignupForm
+from webapp.forms import ContactForm, EditProfileForm, CheckoutForm, ProfessionalSignupForm, ProfileCreationForm
 from webapp.models import Contact, Task, CustomUser, Employer, Employee
 
 
 def landing_view(request):
+    if request.user.is_authenticated:
+        user = CustomUser.objects.get(email=request.user.email)
+        if user.name is None:
+            return redirect('/accounts/profile/create')
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -20,6 +24,8 @@ def landing_view(request):
                 message=message,
             )
             contact.save()
+        else:
+          print(form.errors)
     return render(request, "index.html")
 
 
@@ -186,5 +192,30 @@ def success_view(request):
     return render(request, 'success.html')
 
 
-def test_view(request):
+@login_required
+def profile_creation_view(request):
+    if request.method == 'POST':
+        form = ProfileCreationForm(request.POST)
+        if form.is_valid() and request.user.is_authenticated:
+            name = form.cleaned_data['name']
+            address = form.cleaned_data['address']
+            phno = form.cleaned_data['phno']
+            phno = str(phno) + '91'
+            user = CustomUser.objects.get(email=request.user.email)
+            user.name = name
+            user.phno = phno
+            user.address = address
+            user.save()
+            return redirect('/success')
+        else:
+            print(form.errors)
+
     return render(request, 'account/profile_creation.html')
+
+# def sign_in_processor(request):
+#     user = request.user
+#     required = ['address', 'name', 'phno']
+#     for f in required:
+#         if not f:
+#             return redirect('/test')
+#     return redirect('/')

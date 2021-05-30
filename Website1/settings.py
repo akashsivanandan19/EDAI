@@ -30,7 +30,6 @@ ALLOWED_HOSTS = ['edai-env.eba-sm2x5jtm.us-east-2.elasticbeanstalk.com/',
                  '127.0.0.1']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -106,6 +105,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# SOCIALACCOUNT_ADAPTER = "webapp.my_adapters.MySocialAccountAdapter"
+
 
 AUTH_USER_MODEL = 'webapp.CustomUser'
 
