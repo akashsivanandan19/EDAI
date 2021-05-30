@@ -27,6 +27,12 @@
                   <option value="D">Delhi</option>
                   <option value="B">Bangalore</option>
                  {% endif %}
+             {% if city is None %}
+                  <option value="B">{{ city }}</option>
+                  <option value="M">Mumbai</option>
+                  <option value="D">Delhi</option>
+                  <option value="B">Bangalore</option>
+                 {% endif %}
              </select>
 </body>
 </html>

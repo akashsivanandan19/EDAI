@@ -11,15 +11,28 @@ from .managers import CustomUserManager
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    PUNE = "Pune"
+    PUNE = "P"
+    MUMBAI = "M"
+    BANGALORE = "B"
+    DELHI = "D"
+    CITY = (
+        (MUMBAI, 'Mumbai'),
+        (PUNE, 'Pune'),
+        (BANGALORE, 'Bangalore'),
+        (DELHI, 'Delhi'),
+    )
     email = models.EmailField(_('email address'), unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=30, blank=True, null=True, default=None)
     phno = PhoneNumberField(blank=True)
-    address = models.CharField(max_length=300, blank=False, null=False, default=PUNE)
-    city = models.CharField(max_length=30, blank=False, null=False, default=PUNE)
+    address = models.CharField(max_length=300, blank=False, null=False, default="Pune")
+    # city = models.CharField(max_length=30, blank=False, null=False, default=PUNE)
+    city = models.CharField(max_length=10, blank=False, null=True,
+                            choices=CITY,
+                            default=PUNE,
+                            )
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'phno']
 
@@ -126,7 +139,7 @@ class Task(models.Model):
     description = models.CharField(max_length=300, blank=False, null=True)
     city = models.CharField(max_length=10, blank=False, null=True,
                             choices=CITY,
-                            default=ASSIGNED, )
+                            default=PUNE, )
     address = models.CharField(max_length=300, blank=False, null=False, default="address")
     # name = models.CharField(max_length=100, blank=False, null=True)
     employee = models.EmailField(_("email address"), unique=False)
