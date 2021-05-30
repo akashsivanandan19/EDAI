@@ -80,7 +80,7 @@ def profile_view(request):
     print(request.user.email)
     user_object = CustomUser.objects.get(email=request.user.email)
     try:
-        employee_object = Employee.objects.filter(email=user_object)
+        employee_object = Employee.objects.get(email=user_object)
         if employee_object:
             context = {
                 'type': 'employee',
@@ -96,13 +96,22 @@ def profile_view(request):
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             phno = form.cleaned_data['phno']
+            experience = form.cleaned_data['experience']
+            city = form.cleaned_data['city']
             address = form.cleaned_data['address']
-            user = CustomUser.objects.get(email=request.user)
+            user = CustomUser.objects.get(email=request.user.email)
+            employee = Employee.objects.get(email=user)
 
             user.name = name
             user.email = email
             user.phno = phno
+
             user.address = address
+            user.city = city
+
+            employee.experience = experience
+
+            employee.save(update_fields=['experience'])
             user.save()
             print(form.errors)
 
@@ -110,6 +119,7 @@ def profile_view(request):
                 name=name, email=email, phno=phno,
             )
             obj.save()
+            return redirect('/success')
 
         else:
             print(form.errors)

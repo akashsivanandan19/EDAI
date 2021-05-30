@@ -75,6 +75,8 @@ class CustomLoginForm(LoginForm):
 
 class EditProfileForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    experience = forms.IntegerField(required=False, widget=forms.NumberInput(attrs={"class": "form-control"}))
+    city = forms.CharField(widget=forms.TextInput(attrs={"class": "form-select"}))
     email = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
     address = forms.CharField(required=False, widget=forms.TextInput(attrs={"class": "form-control"}))
     phno = PhoneNumberField(widget=forms.TextInput(attrs={"class": "form-control"}))

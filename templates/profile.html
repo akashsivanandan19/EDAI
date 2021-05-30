@@ -68,22 +68,23 @@
         <label class="form-label" for="email">Email</label>
       </div>
 
-          {% if type == 'employer' %}
-           <!-- Address input -->
+
+        <!-- City input -->
+      {% include 'citypicker.html' %}
+
+       {% if type == 'employee' %}
+           <div class="form-outline mb-4 w-100">
+      <input type="number" name="experience" id="experience"  class="form-control" />
+{#          {{ form.login }}#}
+        <label class="form-label" for="experience">Experience (in years)</label>
+      </div>
+      {% endif %}
+
+          <!-- Address input -->
       <div class="form-outline mb-4">
         <input type="text" style="height: 100px" class="form-control" name="address" id="address" value="{{ employer.address}}"/>
         <label class="form-label" for="address">Address</label>
       </div>
-      {% endif %}
-
-       {% if type == 'employee' %}
-           <!-- Experience input -->
-      <div class="form-outline mb-4">
-        <input type="text" style="height: 100px" class="form-control" name="address" id="address" value="{{ employee }}"/>
-{#          {{ form.email }}#}
-        <label class="form-label" for="address">Address</label>
-      </div>
-      {% endif %}
 
 
 

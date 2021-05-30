@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
- <label for="form-selection2 mb-4" style="margin-top: 1rem">Confirm your city</label>
-             <select class="form-select" aria-label="Default select example" id ="form-selection2" style="margin-top: 1rem; margin-bottom: 1rem" name="city">
+ <label for="form-selection2 mb-4" >Confirm your city</label>
+             <select class="form-select" aria-label="Default select example" id ="form-selection2" style=" margin-bottom: 1rem" name="city">
              {% if city == "Pune" %}
                   <option selected value="Pune">{{ city }}</option>
                   <option value="Mumbai">Mumbai</option>
@@ -28,7 +28,7 @@
                   <option value="B">Bangalore</option>
                  {% endif %}
              {% if city is None %}
-                  <option value="B">{{ city }}</option>
+                  <option value="B">Bangalore</option>
                   <option value="M">Mumbai</option>
                   <option value="D">Delhi</option>
                   <option value="B">Bangalore</option>
