@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser, Contact, Employee, Task
+from .models import CustomUser, Contact, Employee, Task, ServiceRequest
 
 
 class CustomUserAdmin(UserAdmin):
@@ -31,11 +31,16 @@ admin.site.register(Contact)
 
 admin.site.register(Employee)
 
-# admin.site.register(Employer)
+
+@admin.register(ServiceRequest)
+class ServiceRequestAdmin(admin.ModelAdmin):
+    list_display = ('task', 'assigned_employee')
+    ordering = ('task', 'assigned_employee')
+    search_fields = ('task', 'assigned_employee')
 
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('category', 'description',  'status', 'city', 'employer')
+    list_display = ('category', 'description', 'status', 'city', 'employer')
     ordering = ('category', 'status')
     search_fields = ('category', 'status', 'city')

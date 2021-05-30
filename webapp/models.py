@@ -56,7 +56,7 @@ class Employee(models.Model):
     SANITIZATION = 'S'
     PLUMBING = 'M'
 
-    CATEGORY =(
+    CATEGORY = (
         (ELECTRICIAN, 'Electrician'),
         (PEST_CONTROL, 'Pest Control'),
         (SANITIZATION, 'Sanitization'),
@@ -164,3 +164,14 @@ class Task(models.Model):
 
     def __str__(self):
         return self.description
+
+
+class ServiceRequest(models.Model):
+    assigned_employee = models.OneToOneField(
+        Employee,
+        on_delete=models.CASCADE)
+    task = models.OneToOneField(Task,
+                                on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.task.description)
