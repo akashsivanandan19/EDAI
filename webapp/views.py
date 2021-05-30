@@ -25,7 +25,7 @@ def landing_view(request):
             )
             contact.save()
         else:
-          print(form.errors)
+            print(form.errors)
     return render(request, "index.html")
 
 
@@ -128,12 +128,15 @@ def appointment_booking_view(request, city, category):
     city = city
     category = category
     user = CustomUser.objects.get(email=request.user)
-    employer = Employer.objects.get(email=user)
-    context = {
-        'city': city,
-        'category': category,
-        'employer': employer
-    }
+    if Employer.objects.filter(email=user):
+        employer = Employer.objects.get(email=user)
+        context = {
+            'city': city,
+            'category': category,
+            'employer': employer
+        }
+    else:
+        return redirect('/success')
 
     if request.method == 'POST':
         form = CheckoutForm(request.POST)
