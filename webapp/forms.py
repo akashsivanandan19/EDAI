@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.utils.translation import ugettext_lazy as _
 from phonenumber_field.formfields import PhoneNumberField
 
-from .models import CustomUser, Employer
+from .models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -87,10 +87,7 @@ class ContactForm(forms.Form):
 
 
 class CheckoutForm(forms.Form):
-    name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    email = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
     address = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    phno = PhoneNumberField(widget=forms.TextInput(attrs={"class": "form-control"}))
     category = forms.CharField(widget=forms.TextInput(attrs={"class": "form-select"}))
     city = forms.CharField(widget=forms.TextInput(attrs={"class": "form-select"}))
     time_preference = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))

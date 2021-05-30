@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from webapp.forms import ContactForm, EditProfileForm, CheckoutForm, ProfessionalSignupForm, ProfileCreationForm
-from webapp.models import Contact, Task, CustomUser, Employer, Employee
+from webapp.models import Contact, Task, CustomUser, Employee
 
 
 def landing_view(request):
@@ -62,16 +62,6 @@ def profile_view(request):
     print(request.user.email)
     user_object = CustomUser.objects.get(email=request.user.email)
     try:
-        employer_object = Employer.objects.get(email=user_object)
-        if employer_object:
-            context = {
-                '    type': 'employer',
-                'employer': employer_object
-            }
-    except:
-        pass
-
-    try:
         employee_object = Employee.objects.filter(email=user_object)
         if employee_object:
             context = {
@@ -94,17 +84,10 @@ def profile_view(request):
             # if exists(user):
             #     pass
 
-            employer = Employer.objects.filter(email=user)
-            if employer:
-                employer.update(address=address)
-
-            else:
-                employer_new = Employer(email=user, address=address)
-                employer_new.save()
-
             user.name = name
             user.email = email
             user.phno = phno
+            user.address = address
             user.save()
             # print(form.__dict__)
             print(form.errors)
@@ -127,13 +110,13 @@ def profile_view(request):
 def appointment_booking_view(request, city, category):
     city = city
     category = category
-    user = CustomUser.objects.get(email=request.user)
-    if Employer.objects.filter(email=user):
-        employer = Employer.objects.get(email=user)
+    # user = CustomUser.objects.get(email=request.user)
+    if CustomUser.objects.get(email=request.user):
+        user = CustomUser.objects.get(email=request.user)
         context = {
             'city': city,
             'category': category,
-            'employer': employer
+            'employer': user
         }
     else:
         return redirect('/success')
@@ -141,29 +124,31 @@ def appointment_booking_view(request, city, category):
     if request.method == 'POST':
         form = CheckoutForm(request.POST)
         if form.is_valid() and request.user.is_authenticated:
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            phno = form.cleaned_data['phno']
             address = form.cleaned_data['address']
             category1 = form.cleaned_data['category']
             city = form.cleaned_data['city']
-            time_preference = form.cleaned_data['preference']
+            time_preference = form.cleaned_data['time_preference']
             user = CustomUser.objects.get(email=request.user)
             description = form.cleaned_data['description']
             # employer = Employer(email=user, address=address)
-            employer = Employer.objects.get(email=user)
-            if employer:
+            user = CustomUser.objects.get(email=user)
+            if user:
                 address = address
                 category = category1
                 time_preference = time_preference
                 city = city
                 description = description
                 task = Task(
-                    employer=employer,
+                    employer=user,
                     category=category,
-                    time_prefence=time_preference
+                    address=address,
+                    city=city,
+                    description=description,
+                    preference=time_preference
                     # TODO
                 )
+                task.save()
+                return redirect('/success')
             print(form.__dict__)
 
         else:

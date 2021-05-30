@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser, Contact, Employer, Employee, Task
+from .models import CustomUser, Contact, Employee, Task
 
 
 class CustomUserAdmin(UserAdmin):
@@ -31,7 +31,7 @@ admin.site.register(Contact)
 
 admin.site.register(Employee)
 
-admin.site.register(Employer)
+# admin.site.register(Employer)
 
 
 @admin.register(Task)

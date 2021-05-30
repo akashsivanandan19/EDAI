@@ -28,12 +28,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
-class Employer(models.Model):
-    email = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    # address = models.CharField(max_length=300, blank=False, null=False)
-
-    def __str__(self):
-        return str(self.email)
+# class Employer(models.Model):
+#     email = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+#     # address = models.CharField(max_length=300, blank=False, null=False)
+#
+#     def __str__(self):
+#         return str(self.email)
 
 
 class Employee(models.Model):
@@ -121,7 +121,7 @@ class Task(models.Model):
 
     )
 
-    employer = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    employer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     description = models.CharField(max_length=300, blank=False, null=True)
     city = models.CharField(max_length=10, blank=False, null=True,
                             choices=CITY,

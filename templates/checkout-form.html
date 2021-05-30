@@ -2,6 +2,7 @@
 <html lang="en">
 <body>
 <form method="post">
+    {% csrf_token %}
   <!-- Text input -->
   <div class="form-outline mb-4">
     <input type="text" id="form6Example3" class="form-control" value="{{ user.name }}" readonly/>
@@ -10,7 +11,7 @@
 
   <!-- Text input -->
   <div class="form-outline mb-4">
-    <input type="text" id="form6Example4" class="form-control" value="{{ user.address }}"  />
+    <input type="text" id="form6Example4" class="form-control" value="{{ user.address }}" name="address"  />
     <label class="form-label" for="form6Example4">Address</label>
   </div>
 
@@ -34,7 +35,7 @@
 
 <!-- Message input -->
   <div class="form-outline mb-4">
-    <textarea class="form-control" id="form6Example7" rows="4"></textarea>
+    <textarea class="form-control" id="form6Example7" rows="4" name="description"></textarea>
     <label class="form-label" for="form6Example7">Additional information</label>
   </div>
   <!-- Submit button -->
