@@ -79,6 +79,7 @@ def employee_dashboard_view(request):
     tasks = Task.objects.filter(category=employee.category)
     context = {
         'employee': employee,
+        'user': user,
         'tasks': tasks
     }
     return render(request, "staff_dashboard.html", context)
@@ -222,7 +223,16 @@ def professional_signup_view(request):
 
 
 def success_view(request):
-    return render(request, 'success.html')
+    context = None
+    if request.user.is_authenticated:
+        user = CustomUser.objects.get(email=request.user.email)
+        context = {
+            'user': user
+        }
+        if check_employee(request):
+            employee = Employee.objects.get(email = user)
+            context['employee'] = employee
+    return render(request, 'success.html', context)
 
 
 @login_required
@@ -287,8 +297,10 @@ def request_assignment_view(request):
     if request.method == 'POST':
         form = AssignServiceRequestForm(request.POST)
         if form.is_valid():
+            employee_who_requested = form.cleaned_data['employee_id']
             request_id = form.cleaned_data['request_id']
             task = get_object_or_404(Task, pk=request_id)
+            task.employee = employee_who_requested
             task.status = 'A'
             task.save()
             return redirect('/success')

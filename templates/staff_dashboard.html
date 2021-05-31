@@ -22,7 +22,7 @@
 <div class="grid">
 <div class="row row-cols-2 row-cols-md-2 justify-content-center" style="margin-left: 3rem">
     {% for task in tasks %}
-  {% if task.status == 'W' %}
+  {% if task.status == 'W' and task.city == user.city %}
     <div class="col-sm" style="max-width: 600px; min-width: 300px;">
     <div class="grid-item">
 

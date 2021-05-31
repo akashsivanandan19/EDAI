@@ -38,8 +38,15 @@
 					</ul>
 					<!-- Left links -->
 					<div class="d-flex align-items-center">
-          {% if user.is_anonymous %}
+                    {% if user.is_authenticated and employee is None %}
+                        <a href="/account/signup/professional" style="margin-right: 1rem">
+                           Register as a professional
+                        </a>
+{#							<button type="button" class="btn btn-link px-3 me-2">#}
 
+{#        </button>#}
+                    {% endif %}
+          {% if user.is_anonymous %}
 						<a href="/account/signup/professional">
 							<button type="button" class="btn btn-link px-3 me-2">
           Register as a professional

@@ -74,7 +74,7 @@
 
        {% if type == 'employee' %}
            <div class="form-outline mb-4 w-100">
-      <input type="number" name="experience" id="experience"  class="form-control" />
+      <input type="number" name="experience" id="experience"  class="form-control" value="{{ employee.experience }}" />
 {#          {{ form.login }}#}
         <label class="form-label" for="experience">Experience (in years)</label>
       </div>
@@ -82,7 +82,7 @@
 
           <!-- Address input -->
       <div class="form-outline mb-4">
-        <input type="text" style="height: 100px" class="form-control" name="address" id="address" value="{{ employer.address}}"/>
+        <input type="text" style="height: 100px" class="form-control" name="address" id="address" value="{{ user.address}}"/>
         <label class="form-label" for="address">Address</label>
       </div>
 

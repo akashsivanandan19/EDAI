@@ -41,6 +41,6 @@ class ServiceRequestAdmin(admin.ModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('category', 'description', 'status', 'city', 'employer')
+    list_display = ('category', 'description', 'status', 'city', 'employer', 'employee')
     ordering = ('category', 'status')
     search_fields = ('category', 'status', 'city')
