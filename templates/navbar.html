@@ -96,6 +96,13 @@
 										<a class="dropdown-item" href="/accounts/logout">Logout</a>
 									</li>
 								</ul>
+
+                            {% if request.user.is_staff %}
+                                <li>
+										<a class="dropdown-item" href="/requests/assignment">Assign requests</a>
+									</li>
+                                {% endif %}
+
 							</li>
           {% endif %}
                         </ul>

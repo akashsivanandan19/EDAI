@@ -273,6 +273,7 @@ def request_view(request):
     }
     return render(request, 'request_viewing.html', context)
 
+
 @login_required
 def request_assignment_view(request):
     user = CustomUser.objects.all()
