@@ -1,0 +1,96 @@
+{% extends 'base.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block extra_head %}
+    <meta charset="UTF-8">
+    {% include 'cdn_libraries.html' %}
+    <title>Assign requests to employees</title>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+
+<header>
+{% include 'navbar.html' %}
+</header>
+
+<main>
+{% if request.user.is_staff %}
+<div class="grid">
+<div class="row row-cols-2 row-cols-md-2 justify-content-center" style="margin-left: 3rem">
+    {% for request_item in requests %}
+    <div class="col-sm" style="max-width: 600px; min-width: 300px;">
+    <div class="grid-item">
+
+<div class="card text-center border border-primary" style="min-height: 250px; margin-top: 3rem;">
+
+  <div class="card-body">
+   <form method="post">
+   {% csrf_token %}
+
+    <h5 class="card-title">
+        {% if request_item.task.category == 'A' %}AC repair and servicing {% endif %}
+        {% if request_item.task.category == 'P' %}Pest control {% endif %}
+        {% if request_item.task.category == 'S' %}Sanitization {% endif %}
+        {% if request_item.task.category == 'M' %}Plumbing {% endif %}
+    </h5>
+    <p class="card-text">
+        Request status: <span style="color: darkslateblue">{% if request_item.task.status == 'A' %}Assigned {% endif %}</span>
+        <span style="color: green">{% if request_item.task.status == 'W' %}Available {% endif %}</span>
+        <span style="color: darkgoldenrod">{% if request_item.task.status == 'P' %}In progress {% endif %}</span>
+        <span style="color: slategray">{% if request_item.task.status == 'C' %}Completed {% endif %}</span>
+     <br>
+     City: {% if request_item.task.city == 'M' %}Mumbai{% endif %}
+     {% if request_item.task.city == 'P' %}Pune{% endif %}
+     {% if request_item.task.city == 'B' %}Bangalore{% endif %}
+     {% if request_item.task.city == 'D' %}Delhi{% endif %}
+    <br>
+     Request description: {{ request_item.task.description }}
+    <br>
+      Employee who requested: {{ request_item.request_placed_employee  }}
+    </p>
+
+<input type="hidden" name="request_id" value="{{ request_item.task.id }}">
+<input type="hidden" name="employee_id" value="{{ request_item.request_placed_employee }}">
+   <!-- Submit button -->
+
+   <div class="container text-center">
+      <button type="submit" class="btn btn-primary btn-block">Assign task</button>
+   </div>
+
+
+      </form>
+
+  </div>
+ <div class="card-footer text-muted"> Request date: {{ request_item.request_date }}</div>
+</div>
+
+</div>
+    </div>
+
+
+    {% endfor %}
+ </div>
+    </div>
+{% endif %}
+
+{% if not request.user.is_staff %}
+<div class="container-md text-center" style="margin-top: 2rem; font-size: xx-large">Permissions Error</div>
+
+<div class="container-md text-center" style="margin-top: 4rem; font-size: x-large">You are not allowed access to this page</div>
+
+    <a href="/" class="btn btn-primary btn-block">Return to home</a>
+{% endif %}
+
+
+
+</main>
+
+<footer>
+{% include 'footer.html' %}
+</footer>
+{% include 'cdn_js.html' %}
+{% endblock %}
+</body>
+</html>

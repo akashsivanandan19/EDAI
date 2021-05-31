@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
 
 from webapp.forms import ContactForm, EditProfileForm, CheckoutForm, ProfessionalSignupForm, ProfileCreationForm, \
-    SubmitServiceRequestForm
+    SubmitServiceRequestForm, AssignServiceRequestForm
 from webapp.models import Contact, Task, CustomUser, Employee, ServiceRequest
 
 
@@ -262,7 +262,6 @@ def check_employee(request):
 
 
 def request_view(request):
-
     user = CustomUser.objects.get(email=request.user.email)
     employee = Employee.objects.get(email=user)
     tasks = Task.objects.filter(category=employee.category)
@@ -274,5 +273,23 @@ def request_view(request):
     }
     return render(request, 'request_viewing.html', context)
 
-# TODO make two more webpges. One for the employees to view all their service requests that have been generated and
-#  one for the company staff to assign appropriate people to perform the tasks
+@login_required
+def request_assignment_view(request):
+    user = CustomUser.objects.all()
+    employee = Employee.objects.all()
+    requests = ServiceRequest.objects.all()
+    context = {
+        'requests': requests,
+        'user_item': user,
+        'employee': employee
+    }
+    if request.method == 'POST':
+        form = AssignServiceRequestForm(request.POST)
+        if form.is_valid():
+            request_id = form.cleaned_data['request_id']
+            task = get_object_or_404(Task, pk=request_id)
+            task.status = 'A'
+            task.save()
+            return redirect('/success')
+
+    return render(request, 'request_assignment.html', context)

@@ -37,6 +37,7 @@ urlpatterns = [
     path('dashboard', views.customer_dashboard_view, name="dashboard"),
     path('employee/dashboard', views.employee_dashboard_view, name="dashboard"),
     path('employee/requests', views.request_view, name="requests"),
+    path('requests/assignment', views.request_assignment_view, name="requests"),
     path('', views.landing_view, name="home"),
     path('success/', views.success_view, name="success"),
     path('accounts/profile/create', views.profile_creation_view, name='profile-create'),

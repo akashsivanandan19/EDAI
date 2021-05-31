@@ -109,3 +109,8 @@ class ProfileCreationForm(forms.Form):
 
 class SubmitServiceRequestForm(forms.Form):
     task_id = forms.CharField(required=True)
+
+
+class AssignServiceRequestForm(forms.Form):
+    request_id = forms.CharField(required=True)
+    employee_id = forms.CharField(required=True)
