@@ -41,23 +41,17 @@ def landing_view(request):
 @login_required
 def customer_dashboard_view(request):
     user = CustomUser.objects.get(email=request.user.email)
-    task = Task.objects.filter(employer=user)
+    tasks = Task.objects.filter(employer=user)
+    employees = Employee.objects.all()
+    # employees = Employee.objects.filter()
+
     context = {
-        'tasks': task
+        'tasks': tasks,
+        'user': user,
+        'employees': employees
     }
-    if check_employee(request):
-        pass
-        # TODO return a redirect to the employee dashboard
 
     return render(request, "dashboard.html", context)
-
-
-# def task_detail_view(request, task_id):
-#     task_obj = get_object_or_404(Task, name=task_id)
-#     context = {
-#         'task': task_obj
-#     }
-#     return render(request, '/task/details')
 
 
 def employee_dashboard_view(request):
