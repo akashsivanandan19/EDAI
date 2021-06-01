@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
 
 from webapp.forms import ContactForm, EditProfileForm, CheckoutForm, ProfessionalSignupForm, ProfileCreationForm, \
-    SubmitServiceRequestForm, AssignServiceRequestForm
+    SubmitServiceRequestForm, AssignServiceRequestForm, TaskUpdateForm
 from webapp.models import Contact, Task, CustomUser, Employee, ServiceRequest
 
 
@@ -230,7 +230,7 @@ def success_view(request):
             'user': user
         }
         if check_employee(request):
-            employee = Employee.objects.get(email = user)
+            employee = Employee.objects.get(email=user)
             context['employee'] = employee
     return render(request, 'success.html', context)
 
@@ -306,3 +306,31 @@ def request_assignment_view(request):
             return redirect('/success')
 
     return render(request, 'request_assignment.html', context)
+
+
+@login_required
+def employee_task_view(request):
+    user = CustomUser.objects.get(email=request.user)
+    # task = get_object_or_404(Task, employee=request.user.email)
+    task = Task.objects.filter(employee=request.user.email)
+    context = {
+        'user': user,
+        'tasks': task,
+    }
+    if check_employee(request):
+        employee = Employee.objects.get(email=user)
+        context['employee'] = employee
+    else:
+        pass
+    if request.method == 'POST':
+        form = TaskUpdateForm(request.POST)
+        if form.is_valid():
+            task_id = form.cleaned_data['task_id']
+            task_status = form.cleaned_data['task_status']
+            task_obj = get_object_or_404(Task, pk=task_id)
+            task_obj.status = task_status
+            task_obj.save()
+            return redirect('/success')
+        else:
+            print(form.errors)
+    return render(request, 'employee_tasks.html', context)

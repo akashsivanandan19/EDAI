@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block extra_head %}
+        {% include 'cdn_libraries.html' %}
+    <meta charset="UTF-8">
+    <title>Your tasks</title>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<header>
+{% include 'navbar.html' %}
+</header>
+
+<main>
+<div class="grid">
+<div class="row row-cols-2 row-cols-md-2 justify-content-center" style="margin-left: 3rem">
+    {% for task in tasks %}
+    <div class="col-sm" style="max-width: 600px; min-width: 300px;">
+    <div class="grid-item">
+{% if task.status != 'W' and task.city == user.city %}
+<div class="card text-center border border-primary" style="min-height: 260px; margin-top: 3rem;">
+  <div class="card-body">
+   <form method="post">
+   {% csrf_token %}
+
+    <h5 class="card-title">
+{#        {% if task.category == 'A' %}AC repair and servicing {% endif %}#}
+{#        {% if task.category == 'P' %}Pest control {% endif %}#}
+{#        {% if task.category == 'S' %}Sanitization {% endif %}#}
+{#        {% if task.category == 'M' %}Plumbing {% endif %}#}
+        Task
+    </h5>
+    <p class="card-text">
+        Request status: <span style="color: darkslateblue">{% if task.status == 'A' %}Assigned {% endif %}</span>
+        <span style="color: green">{% if task.status == 'W' %}Waiting {% endif %}</span>
+        <span style="color: darkgoldenrod">{% if task.status == 'P' %}In progress {% endif %}</span>
+        <span style="color: darkgreen">{% if task.status == 'C' %}Completed {% endif %}</span>
+     <br>
+     City: {% if task.city == 'M' %}Mumbai{% endif %}
+     {% if task.city == 'P' %}Pune{% endif %}
+     {% if task.city == 'B' %}Bangalore{% endif %}
+     {% if task.city == 'D' %}Delhi{% endif %}
+    <br>
+     Request description: {{ task.description }}
+    <br>
+{#      Employee who requested: {{ request_item.request_placed_employee  }}#}
+    Request Location: {{ task.address }}
+    </p>
+
+<input type="hidden" name="task_id" value="{{ task.id }}">
+{#<input type="hidden" name="employee_id" value="{{ request_item.request_placed_employee }}">#}
+   <!-- Submit button -->
+{% if task.status == 'P'  %}
+   <div class="container text-center">
+      <button type="submit" class="btn btn-primary btn-block">Mark as completed</button>
+     <input type="hidden" name="task_status" value="C">
+   </div>
+    {% endif %}
+
+   {% if task.status == 'A' %}
+   <div class="container text-center">
+      <button type="submit" class="btn btn-primary btn-block">Start task</button>
+   </div>
+           <input type="hidden" name="task_status" value="P">
+       {% endif %}
+
+
+      </form>
+
+  </div>
+ <div class="card-footer text-muted"> Request date: {{ task.issue_date }}</div>
+</div>
+
+    {% endif %}
+
+
+</div>
+    </div>
+    {% endfor %}
+
+ </div>
+    </div>
+{% if tasks == None %}
+    <div class="container-md text-center" style="margin-top: 2rem; font-size: xx-large">All caught up!</div>
+    <div class="container-md text-center" style="margin-top: 2rem; font-size: x-large"> No tasks remaining</div>
+    {% endif %}
+
+</main>
+
+<footer>
+{% include 'footer.html' %}
+</footer>
+
+{% include 'cdn_js.html' %}
+{% endblock %}
+</body>
+</html>

@@ -114,3 +114,8 @@ class SubmitServiceRequestForm(forms.Form):
 class AssignServiceRequestForm(forms.Form):
     request_id = forms.CharField(required=True)
     employee_id = forms.CharField(required=True)
+
+
+class TaskUpdateForm(forms.Form):
+    task_id = forms.CharField(required=True)
+    task_status = forms.CharField(required=True)

@@ -21,6 +21,7 @@
 <div class="row row-cols-2 row-cols-md-2 justify-content-center" style="margin-left: 3rem">
     {% for request_item in requests %}
     <div class="col-sm" style="max-width: 600px; min-width: 300px;">
+    {% if request_item.task.status == 'W' %}
     <div class="grid-item">
 
 <div class="card text-center border border-primary" style="min-height: 250px; margin-top: 3rem;">
@@ -37,7 +38,7 @@
     </h5>
     <p class="card-text">
         Request status: <span style="color: darkslateblue">{% if request_item.task.status == 'A' %}Assigned {% endif %}</span>
-        <span style="color: green">{% if request_item.task.status == 'W' %}Available {% endif %}</span>
+        <span style="color: green">{% if request_item.task.status == 'W' %}Waiting {% endif %}</span>
         <span style="color: darkgoldenrod">{% if request_item.task.status == 'P' %}In progress {% endif %}</span>
         <span style="color: slategray">{% if request_item.task.status == 'C' %}Completed {% endif %}</span>
      <br>
@@ -67,6 +68,7 @@
 </div>
 
 </div>
+    {% endif %}
     </div>
 
 
