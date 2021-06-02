@@ -53,6 +53,10 @@ class CustomSignupForm(SignupForm):
         user = super(CustomSignupForm, self).save(request)
         phno = self.cleaned_data['phno']
         name = self.cleaned_data['name']
+        address = self.cleaned_data['address']
+        city = self.cleaned_data['city']
+        user.address = address
+        user.city = city
         user.phno = phno
         user.name = name
         user.save()
