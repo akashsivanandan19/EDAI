@@ -65,6 +65,7 @@ def employee_dashboard_view(request):
             service_request.request_placed_employee = Employee.objects.get(
                 email=CustomUser.objects.get(email=request.user.email))
             service_request.save()
+            return  redirect('/success')
         else:
             print(form.errors)
 
@@ -191,6 +192,7 @@ def appointment_booking_view(request, city, category):
                     employer=user,
                     category=category,
                     address=address,
+                    status='W',
                     city=city,
                     description=description,
                     preference=time_preference
@@ -290,7 +292,8 @@ def request_view(request):
 def request_assignment_view(request):
     user = CustomUser.objects.all()
     employee = Employee.objects.all()
-    requests = ServiceRequest.objects.all()
+    requests = ServiceRequest.objects.filter(task__status='W')
+    print(requests)
     context = {
         'requests': requests,
         'user_item': user,

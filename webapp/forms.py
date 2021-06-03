@@ -27,9 +27,11 @@ class CustomSignupForm(SignupForm):
         self.fields['name'] = forms.CharField(required=True)
         self.fields['phno'] = PhoneNumberField(required=True)
         self.fields['address'] = forms.CharField(required=True)
+        self.fields['city'] = forms.CharField(required=True)
 
         self.fields['email'].widget.attrs['class'] = 'form-control'
         self.fields['name'].widget.attrs['class'] = 'form-control'
+        self.fields['city'].widget.attrs['class'] = 'form-select'
         self.fields['address'].widget.attrs['class'] = 'form-control'
         self.fields['phno'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['class'] = 'form-control'
@@ -54,7 +56,7 @@ class CustomSignupForm(SignupForm):
         phno = self.cleaned_data['phno']
         name = self.cleaned_data['name']
         address = self.cleaned_data['address']
-        city = self.cleaned_data['city']
+        city = self.cleaned_data.get('city')
         user.address = address
         user.city = city
         user.phno = phno
