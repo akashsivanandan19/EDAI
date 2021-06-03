@@ -121,12 +121,6 @@ def profile_view(request):
             city = form.cleaned_data['city']
             address = form.cleaned_data['address']
             user = CustomUser.objects.get(email=request.user.email)
-            # if check_employee:
-            #     experience = form.cleaned_data['experience']
-            #     # employee = Employee.objects.get(email=user)
-            #     employee = Employee.objects.get(email=user).first()
-            #     employee.experience = experience
-            #     employee.save(update_fields=['experience'])
             try:
                 employee = Employee.objects.get(email=user)
                 experience = form.cleaned_data['experience']
@@ -316,7 +310,6 @@ def request_assignment_view(request):
 @login_required
 def employee_task_view(request):
     user = CustomUser.objects.get(email=request.user)
-    # task = get_object_or_404(Task, employee=request.user.email)
     task = Task.objects.filter(employee=request.user.email)
     context = {
         'user': user,
