@@ -4,15 +4,15 @@
  <label for="form-selection2 mb-4" >Confirm your city</label>
              <select class="form-select" aria-label="Default select example" id ="form-selection2" style=" margin-bottom: 1rem" name="city">
              {% if user.city == "P" %}
-                  <option selected value="P">{{ city }}</option>
+                  <option selected value="P">Pune</option>
                   <option value="M">Mumbai</option>
                   <option value="D">Delhi</option>
                   <option value="B">Bangalore</option>
                  {% endif %}
              {% if user.city == "D" %}
-                  <option selected value="D">{{ city }}</option>
+                  <option selected value="D">Delhi</option>
                   <option value="M">Mumbai</option>
-                  <option value="D">Delhi</option>
+                  <option value="P">Pune</option>
                   <option value="B">Bangalore</option>
                  {% endif %}
              {% if user.city == "M" %}
