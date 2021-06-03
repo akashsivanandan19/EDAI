@@ -74,7 +74,7 @@
 									<li>
 										<a class="dropdown-item" href="/profile">Edit profile</a>
 									</li>
-                                    {% if employee != None %}
+                                    {% if employee != None and not request.user.is_staff%}
                                         <li>
 										<a class="dropdown-item" href="/employee/dashboard">E Dashboard</a>
 									</li>
