@@ -38,15 +38,6 @@ class CustomSignupForm(SignupForm):
         self.fields['password2'].widget.attrs['class'] = 'form-control'
 
     # # Put in custom signup logic
-    # def custom_signup(self, request, user):
-    #     # Set the user's type from the form reponse
-    #     user.email = self.cleaned_data["email"]
-    #     user.name = self.cleaned_data["name"]
-    #     user.phno = self.cleaned_data["phno"]
-    #     user.password = self.cleaned_data["password1"]
-    #     # user.save()
-    #     user = super(CustomSignupForm, self).save(request)
-    #     return user
 
     def save(self, request):
         # Ensure you call the parent class's save.
