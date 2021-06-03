@@ -22,11 +22,6 @@ from webapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # url(
-    #     r'^accounts/signup/company/$',
-    #     # views.employee_signup,
-    #     #name='employee-signup'
-    # ),
     url(r'^', include('allauth_2fa.urls')),
     url(r'^', include('allauth.urls')),
     path('test/', views.request_view, name='test'),
@@ -44,4 +39,4 @@ urlpatterns = [
     path('success/', views.success_view, name="success"),
     path('accounts/profile/create', views.profile_creation_view, name='profile-create'),
     path('profile/', views.profile_view, name="profile"), ]
-# path("employee/signup", views.employee_signup, name="employee-login"),
+
