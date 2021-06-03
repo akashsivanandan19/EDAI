@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 from django.views.generic import DetailView
 
@@ -103,6 +103,7 @@ def profile_view(request):
         employee_object = Employee.objects.get(email=user_object)
         if employee_object:
             context = {
+                'user': user_object,
                 'type': 'employee',
                 'employee': employee_object
             }
@@ -116,11 +117,22 @@ def profile_view(request):
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             phno = form.cleaned_data['phno']
-            experience = form.cleaned_data['experience']
             city = form.cleaned_data['city']
             address = form.cleaned_data['address']
             user = CustomUser.objects.get(email=request.user.email)
-            employee = Employee.objects.get(email=user)
+            # if check_employee:
+            #     experience = form.cleaned_data['experience']
+            #     # employee = Employee.objects.get(email=user)
+            #     employee = Employee.objects.get(email=user).first()
+            #     employee.experience = experience
+            #     employee.save(update_fields=['experience'])
+            try:
+                employee = Employee.objects.get(email=user)
+                experience = form.cleaned_data['experience']
+                employee.experience = experience
+                employee.save(update_fields=['experience'])
+            except ObjectDoesNotExist:
+                employee = None
 
             user.name = name
             user.email = email
@@ -129,9 +141,6 @@ def profile_view(request):
             user.address = address
             user.city = city
 
-            employee.experience = experience
-
-            employee.save(update_fields=['experience'])
             user.save()
             print(form.errors)
 
@@ -255,12 +264,11 @@ def check_employee(request):
         user = CustomUser.objects.get(email=request.user.email)
         try:
             employee_object = Employee.objects.filter(email=user)
-            if employee_object:
+            length = len(employee_object)
+            if length != 0:
                 return True
-            else:
+            elif length == 0:
                 return False
-
-
         except:
             pass
 

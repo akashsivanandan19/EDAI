@@ -3,31 +3,31 @@
 <body>
  <label for="form-selection2 mb-4" >Confirm your city</label>
              <select class="form-select" aria-label="Default select example" id ="form-selection2" style=" margin-bottom: 1rem" name="city">
-             {% if city == "Pune" %}
+             {% if user.city == "P" %}
                   <option selected value="P">{{ city }}</option>
                   <option value="M">Mumbai</option>
                   <option value="D">Delhi</option>
                   <option value="B">Bangalore</option>
                  {% endif %}
-             {% if city == "Delhi" %}
+             {% if user.city == "D" %}
                   <option selected value="D">{{ city }}</option>
                   <option value="M">Mumbai</option>
                   <option value="D">Delhi</option>
                   <option value="B">Bangalore</option>
                  {% endif %}
-             {% if city == "Mumbai" %}
-                  <option selected value="M">{{ city }}</option>
+             {% if user.city == "M" %}
+                  <option selected value="M">Mumbai</option>
                   <option value="P">Pune</option>
                   <option value="D">Delhi</option>
                   <option value="B">Bangalore</option>
                  {% endif %}
-             {% if city == "Bangalore" %}
+             {% if user.city == "B" %}
                   <option selected value="B">{{ city }}</option>
                   <option value="M">Mumbai</option>
                   <option value="D">Delhi</option>
                   <option value="B">Bangalore</option>
                  {% endif %}
-             {% if city is None %}
+             {% if user.city is None %}
                   <option value="P">Pune</option>
                   <option value="M">Mumbai</option>
                   <option value="D">Delhi</option>

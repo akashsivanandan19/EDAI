@@ -65,7 +65,8 @@
     <br>
      Request description: {{ task.description }}
     </p>
-     {% if task.employee != None %}Employee assigned: {{ task.employee }} {% endif %}
+     {% if task.employee != '' %}Employee assigned: {{ task.employee }} {% endif %}
+      {% if task.employee == '' %}<h5>Please wait, employee to be assigned </h5>{% endif %}
 {#    <a href="#" class="btn btn-primary">Go somewhere</a>#}
   </div>
   <div class="card-footer text-muted"> Request date: {{ task.issue_date }}</div>
