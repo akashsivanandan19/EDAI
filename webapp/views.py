@@ -98,7 +98,6 @@ def exists(obj):
 
 def profile_view(request):
     context = {}
-    print(request.user.email)
     user_object = CustomUser.objects.get(email=request.user.email)
     try:
         employee_object = Employee.objects.get(email=user_object)
