@@ -49,6 +49,10 @@
     <br>
 {#      Employee who requested: {{ request_item.request_placed_employee  }}#}
     Request Location: {{ task.address }}
+    <br>
+    Employer name: {{ task.employer.name }}
+    <br>
+    Employer phone number: {{ task.employer.phno }}
     </p>
 
 <input type="hidden" name="task_id" value="{{ task.id }}">
